@@ -1,0 +1,42 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: loan-api-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: loan_api
+      MYSQL_USER: loan_user
+      MYSQL_PASSWORD: loan_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - loan-network
+
+  app:
+    build: .
+    container_name: loan-api-app
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=loan_api
+      - DB_USER=loan_user
+      - DB_PASSWORD=loan_password
+    depends_on:
+      - mysql
+    networks:
+      - loan-network
+
+volumes:
+  mysql_data:
+
+networks:
+  loan-network:
+    driver: bridge
