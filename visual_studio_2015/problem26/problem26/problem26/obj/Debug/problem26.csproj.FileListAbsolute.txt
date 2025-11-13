@@ -1,0 +1,6 @@
+d:\projects\visual_studio_2015\problem26\problem26\problem26\bin\Debug\problem26.exe.config
+d:\projects\visual_studio_2015\problem26\problem26\problem26\bin\Debug\problem26.exe
+d:\projects\visual_studio_2015\problem26\problem26\problem26\bin\Debug\problem26.pdb
+d:\projects\visual_studio_2015\problem26\problem26\problem26\obj\Debug\problem26.csprojResolveAssemblyReference.cache
+d:\projects\visual_studio_2015\problem26\problem26\problem26\obj\Debug\problem26.exe
+d:\projects\visual_studio_2015\problem26\problem26\problem26\obj\Debug\problem26.pdb

@@ -1,0 +1,19 @@
+*{
+    direction: rtl;
+    text-align: right;
+}
+
+html,body {
+    box-sizing:border-box; 
+    height : 100%;  
+}
+
+.heb{
+    direction: rtl;
+    text-align: right;
+}
+
+.move-right {
+    width: auto;
+    box-shadow: none;
+  }

@@ -1,0 +1,179 @@
+<!-- <ng4-loading-spinner [template]="template"> </ng4-loading-spinner> -->
+<div class="modal-header">
+  <h4 class="modal-title" id="Heading">Edit Flight Details</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true" (click)="activeModal.dismiss('Cross click')">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <!-- <form [formGroup]="editForm" novalidate (ngSubmit)="onUpdate()" autocomplete="on"> -->
+  <form [formGroup]="editForm" (ngSubmit)="onUpdate()" autocomplete="on">
+
+    <div class="form-group">
+      <label for="flightId">Flight Id</label>
+      <input type="text" name="flightId" formControlName="flightId" class="form-control" id="flightId" placeholder="Enter Flight Id (AE123)"
+        [ngClass]="{ 'is-invalid': submitted && f.flightId.errors }">
+      <div *ngIf="submitted && f.flightId.errors" class="invalid-feedback">
+        <div *ngIf="f.flightId.errors.required">FlightId is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="airlineName">Airline</label>
+      <select class="form-control dropdown" id="airlineName" formControlName="airlineName">
+        <!-- <option selected disable>{{flight.airlineName ? flight.airlineName.name : ''}}</option> -->
+        <!-- <option *ngFor="let airlineObj of airlines" [ngValue]="airlineObj" [selected] = "airlineObj.name===flight.airlineName.name">{{airlineObj.name}}</option> -->
+        <option *ngFor="let airlineObj of airlines" [ngValue]="airlineObj" [selected] = "!isNew && airlineObj.name===flight.airlineName.name">{{airlineObj.name}}</option>
+      </select>
+    </div>
+
+    <!-- <div class="form-group">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="customFile">
+        <label class="custom-file-label" for="customFile">Choose Image for airline</label>
+      </div>
+    </div> -->
+
+    <!-- Departure -->
+    <div class="form-group">
+      <label for="departure">Departure</label>
+      <div class="form-row">
+        <div class="col">
+          <div class="input-group align-items-center h-100">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="departure" formControlName="departure" [firstDayOfWeek]=0
+              ngbDatepicker #dep="ngbDatepicker" [ngClass]="{ 'is-invalid': submitted && f.departure.errors }">
+              <!-- ngbDatepicker [footerTemplate]="footerTemplate" #dep="ngbDatepicker" [ngClass]="{ 'is-invalid': submitted && f.departure.errors }"> -->
+            <div class="input-group-append">
+
+              <button class="btn btn-outline-secondary calendar" (click)="dep.toggle()" type="button">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="submitted && f.departure.errors" class="invalid-feedback">
+            <div *ngIf="f.departure.errors.required">Departure Time is required</div>
+          </div>
+        </div>
+
+        <div class="col">
+          <ngb-timepicker formControlName="departureTime"></ngb-timepicker>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrival -->
+
+    <div class="form-group">
+      <label for="arrival">Arrival</label>
+      <div class="form-row">
+        <div class="col">
+
+          <div class="input-group align-items-center h-100">
+            <input class="form-control" placeholder="yyyy-mm-dd" name="arrival" formControlName="arrival" ngbDatepicker [firstDayOfWeek]=0
+              #arr="ngbDatepicker" [ngClass]="{ 'is-invalid': submitted && f.arrival.errors }">
+              <!-- [footerTemplate]="footerTemplate" #arr="ngbDatepicker" [ngClass]="{ 'is-invalid': submitted && f.arrival.errors }"> -->
+            <div class="input-group-append">
+
+              <button class="btn btn-outline-secondary calendar" (click)="arr.toggle()" type="button">
+                <i class="fa fa-calendar" aria-hidden="true"></i>                
+              </button>
+            </div>
+          </div>
+          <div *ngIf="submitted && f.arrival.errors" class="invalid-feedback">
+            <div *ngIf="f.arrival.errors.required">Arrival Time is required</div>            
+          </div>
+        </div>
+
+        <div class="col">
+          <ngb-timepicker formControlName="arrivalTime"></ngb-timepicker>
+        </div>
+      </div>      
+    </div> 
+
+    <!-- <div class="form-check">
+        <label class="isOneWay">
+            <input type="checkbox" class="form-check-input" name="isOneWay" id="isOneWay" value="checkedValue" formControlName="isOneWay">
+            One Way ?
+          </label>
+        <label class="isTwoWay">
+          <input type="checkbox" class="form-check-input" name="isTwoWay" id="isTwoWay" value="checkedValue" formControlName="isTwoWay">
+          Two Way ?
+        </label>
+      </div>
+
+    <div *ngIf="f.isTwoWay.value">
+      <div class="form-group">
+        <label for="return">Return</label>
+        <select class="form-control dropdown" id="return" formControlName="return">
+          <option *ngFor="let flight of flights" [ngValue]="flight" [selected]="">{{flight.departure | date:'medium'}}</option>
+        </select>
+      </div>
+    </div> -->
+
+    <div class="form-group">
+      <label for="costPrice">Cost Price</label>
+      <input type="number" name="costPrice" class="form-control" formControlName="costPrice" id="costPrice" placeholder="Enter Cost Price">
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" name="price" class="form-control" formControlName="price" id="price" placeholder="Enter Price">
+    </div>
+
+    <div class="form-check">
+      <label class="is-on-sale">
+        <input type="checkbox" class="form-check-input" name="sale" id="sale" value="checkedValue" formControlName="sale">
+        Sale
+      </label>
+    </div>
+
+    <div *ngIf="f.sale.value">
+      <div class="form-group">
+        <label for="salePrice">Sale Price</label>
+        <input type="number" name="salePrice" class="form-control" formControlName="salePrice" id="salePrice"
+          placeholder="Enter Sale Price">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="seats">Seats</label>
+      <input type="number" name="seats" class="form-control" formControlName="seats" id="seats" placeholder="Enter Seats Number">
+    </div>
+
+    <!-- <div class="form-group">
+        <label for="direction">Direction</label>
+        <select class="form-control dropdown" id="direction" formControlName="direction">
+          <option *ngFor="let dir of directions" [ngValue]="dir" [selected]="compareDirection(flight.direction,dir)" >{{dir}}</option>
+        </select>
+      </div> -->
+
+
+    <div class="form-group">
+      <label for="origin">Origin</label>
+      <select class="form-control dropdown" id="origin" formControlName="origin"> 
+          <!-- <div *ngIf="flight">
+              <option selected disabled [ngValue]="flight.origin">{{getName(flight.origin)}}</option>
+            </div>             -->
+        <option *ngFor="let origin of locations" [ngValue]="origin" [selected] = "!isNew && origin._id === flight.origin._id">{{getName(origin)}}</option>
+        
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="destination">Destination</label>
+      <select class="form-control dropdown" id="destination" formControlName="destination">   
+        <!-- <div *ngIf="flight">
+          <option selected disabled [ngValue]="flight.destination">{{getName(flight.destination)}}</option>
+        </div>        -->
+        <option *ngFor="let dest of locations" [ngValue]="dest" [selected] = "!isNew && dest._id === flight.destination._id">{{getName(dest)}}</option>        
+      </select>
+    </div>
+
+  </form>
+</div>
+<flash-messages></flash-messages>
+<div class="modal-footer ">
+  <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" (click)="onUpdate()"><span>
+      <i class="fa fa-check" aria-hidden="true"></i></span> Update</button>
+</div>

@@ -1,0 +1,62 @@
+<ng4-loading-spinner [template]="template"> </ng4-loading-spinner>
+<div class="border-margin heb headline-border pt-4">
+  <div class="h1">נציגנו עומדים לרשותכם</div>
+  <div class="h2">התקשרו אלינו, או שלחו לנו מייל, ואנו נחזור אליכם בהקדם האפשרי.</div>
+  <div class="mt-5 row">
+    <div class="col-md-6">
+      <form [formGroup]="contactForm" (ngSubmit)="contactForm.valid && onSubmit()" novalidate>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <input type="text" class="form-control set-colors" name="firstname" id="firstname" placeholder="שם פרטי"
+              formControlName="firstname">
+          </div>
+          <div class="form-group col-md-3">
+            <input type="text" class="form-control set-colors" name="lastname" id="lastname" placeholder="שם משפחה"
+              formControlName="lastname">
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <input type="email" class="form-control set-colors" name="email" id="email" placeholder="אימייל"
+              formControlName="email">
+          </div>
+        </div >
+  
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <textarea class="col set-colors" rows="3" placeholder="כתוב לנו" formControlName="message"></textarea>
+          </div>
+        </div>
+  
+        <div class="form-row">
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input ml-2" id="exampleCheck1" formControlName="register">
+            </div>
+            <label class="form-check-label color-blue" for="exampleCheck1">אני מעוניין לקבל עדכונים ומבצעים למייל</label>
+          </div>
+        </div>
+  
+  
+        <div class="form-group">
+          <button type="submit" [disabled]="contactForm.pristine || contactForm.invalid" class="btn btn-primary btn-colors mr-sm-2 mt-2 mt-sm-0">
+            <span>
+              <img src="../../../assets/images/SIMBOLE-WHITE.png" alt="">
+            </span>  שלח  
+          </button>
+        </div>
+
+        <flash-messages></flash-messages>
+      </form>
+    </div>
+  </div>
+  <section class="contact-details">    
+    <div class="h5">050-5730400</div>
+    <div class="h5">054-2112427</div>
+    <div class="h5 mt-4">CHECKINTRAVEL.FLYING@GMAIL.COM</div>
+  </section>
+</div>
+<div class="border-margin">  
+    <img src="../../assets/images/contact/contact_page.jpg" class="rounded image-size" alt="cyprus">   
+</div>

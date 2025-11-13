@@ -1,0 +1,44 @@
+@import '../../styles.scss';
+
+.color-gold {
+  color: color(primary-gold);
+}
+
+.color-blue {
+  color: color(primary-blue);
+}
+
+.flight-order {
+  position: relative;
+
+  // section {
+  //   position: absolute;
+  //   top: 4rem;
+  //   right: 5rem;
+
+  // }
+
+  .order-text{
+    position: absolute;
+    top: 3.5rem;
+    right: 4rem;
+  }
+
+  img {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .order-price {
+    border-bottom: 3px solid color(primary-gold);
+  }
+}
+
+.flight-order:hover{
+  cursor:pointer
+}
+
+.figure-img {
+  width: 54.5px;
+  height: 49.5px;
+}

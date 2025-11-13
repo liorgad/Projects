@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-light border-margin pl-0 pr-0">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse d-flex" id="navbarSupportedContent">
+    <section>
+      <ul class="navbar-nav ml-auto pr-0">
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle font-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="true">
+            תפריט
+          </a>
+          <div class="dropdown-menu mt-4 bg" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item font-color" [routerLink]="[ '/']">דף הבית</a>
+            <a class="dropdown-item font-color" [routerLink]="[ '/about']">מי אנחנו</a>
+            <a class="dropdown-item font-color" [routerLink]="[ '/contact']">צור קשר</a>
+            <a class="dropdown-item font-color" [routerLink]="[ '/legal']">תקנון</a>
+            <a class="dropdown-item font-color" [routerLink]="[ '/privacy']">מדיניות פרטיות</a>
+          </div>
+        </li>
+        <div *ngIf="!isUser">
+          <li class="nav-item mr-4">
+            <a class="nav-link " [routerLink]="[ '/login']">
+              התחבר
+              <img src="../../assets/images/SIMBOLE-BLUE.png" onmouseover="this.src='../../assets/images/SIMBOLE-GOLD.png'"
+                onmouseout="this.src='../../assets/images/SIMBOLE-BLUE.png'">
+            </a>
+          </li>
+        </div>
+        <div *ngIf="isUser">
+          <li class="nav-item mr-4">
+            <a class="nav-link font-color btn" role="button" (click)="logout()">
+              התנתק
+            </a>
+          </li>
+        </div>
+        <div *ngIf="isUser && isSiteManager">
+          <li class="nav-item mr-4">
+            <a class="nav-link font-color btn" role="button" [routerLink]="[ '/administrator']">
+              מנהל
+            </a>
+          </li>
+        </div>
+      </ul>
+    </section>
+    <div *ngIf="isUser" class="d-flex align-items-center justify-content-center mx-auto">
+      <a class="nav-link lead font-color"><span class="font-weight-bold">שלום</span>, {{name}} !</a>
+    </div>
+  </div>  
+  <a class="navbar-brand mr-auto p-3" [routerLink]="['/']">
+    <img src="../../assets/images/LOGO.png" alt="logo" />
+  </a>
+</nav>

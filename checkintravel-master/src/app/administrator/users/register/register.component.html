@@ -1,0 +1,72 @@
+<div class="container mt-5">
+  <h2 class="page-header">Register</h2>
+  <form [formGroup]="registerForm" novalidate (ngSubmit)="onRegisterSubmit()">
+    <flash-messages></flash-messages>
+    <div class="form-group">
+      <label for="manager">Manager</label>
+      <input type="text" name="manager" formControlName="manager" class="form-control" id="manager" placeholder="Enter Manager Name" [ngClass]="{ 'is-invalid': submitted && f.manager.invalid }">
+      <div *ngIf="submitted && f.manager.invalid" class="invalid-feedback">
+        <div *ngIf="f.manager.errors.required">Manager Name is required</div>
+    </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" formControlName="email" class="form-control" id="email" aria-describedby="emailHelp"
+        placeholder="Enter Email" [ngClass]="{ 'is-invalid': submitted && f.email.invalid }">
+      <div *ngIf="submitted && f.email.invalid" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+      </div>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" name="password" formControlName="password" class="form-control" id="password" placeholder=" Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.invalid }">
+      <div *ngIf="submitted && f.password.invalid" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+    </div>
+    </div>
+
+    <!-- using ngValue for objects, [value] is for strings -->
+    <div class="form-group">
+      <label for="userRole">Roles</label>
+      <select class="form-control dropdown" id="userRole" formControlName="selectedRole">
+        <option *ngFor="let role of roles" [ngValue]="role">{{role.name}}</option>
+      </select>
+    </div>
+
+
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="tel" name="phone" class="form-control" formControlName="phone" id="phone" placeholder="Enter Phone Number">
+    </div>
+
+    <div class="form-group">
+      <label for="seatLimit">Seats Limit</label>
+      <input type="number" name="seatLimit" class="form-control" formControlName="seatLimit" id="seatLimit" placeholder="Enter Seats Limit">
+    </div>
+
+    <div class="form-group">
+      <label for="fixedPrice">Fixed Price</label>
+      <input type="number" name="fixedPrice" class="form-control" formControlName="fixedPrice" id="fixedPrice"
+        placeholder="Enter Fixed Price">
+    </div>
+
+    <div class="form-group">
+      <label for="currentPrice">Current Price </label>
+      <input type="number" name="currentPrice" class="form-control" formControlName="currentPrice" id="currentPrice"
+        placeholder="Enter Current Price">
+    </div>
+
+    <div class="form-group">
+      <label for="initialCredit">Credit</label>
+      <input type="number" name="initialCredit" class="form-control" formControlName="initialCredit" id="initialCredit"
+        placeholder="Enter Credit">
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>

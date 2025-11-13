@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>    
+    <script src="app.js"></script> -->
+</head>
+<body>
+    <!-- <div style="width : 500px;height : 400px"> -->
+        <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script> 
+        <script type='text/javascript' src='https://www.google.com/jsapi'></script>
+        <script type='text/javascript'>google.charts.load('42', {'packages':['geochart']});
+        google.charts.setOnLoadCallback(drawVisualization);
+        
+          function drawVisualization() {var data = new google.visualization.DataTable();
+        
+         data.addColumn('number', 'Lat'); 
+         data.addColumn('number', 'Lon'); 
+         data.addColumn('string', 'Country');
+         data.addColumn('number', 'Value'); 
+         data.addColumn({type:'string', role:'tooltip'});var ivalue = new Array();
+        
+         data.addRows([[51.507351,-0.127758,'United Kingdom',0,'Josh Levy']]);
+         ivalue['51.507351'] = 'https://twitter.com/Joshua_Levy';
+        
+         data.addRows([[41.608635,21.745275,'Macedonia',1,'Denis Garbuzov']]);
+         ivalue['41.608635'] = 'https://www.linkedin.com/in/denis-garbuzov-bb380b34/';
+        
+         var options = {
+         backgroundColor: {fill:'f4f2ed',stroke:'f4f2ed' ,strokeWidth:0 },
+         colorAxis:  {minValue: 0, maxValue: 1,  colors: ['#00313C','#00313C']},
+         legend: 'none',	
+         datalessRegionColor: 'c48f5e',
+         displayMode: 'markers', 
+         enableRegionInteractivity: 'true', 
+         resolution: 'countries',
+         sizeAxis: {minValue: 1, maxValue:1,minSize:12,  maxSize: 12},
+         region:'150',
+         keepAspectRatio: false,
+         width:559,
+         height:539,
+         tooltip: {textStyle: {color: '#444444'}, trigger:'focus', isHtml: false}	
+         };
+          var chart = new google.visualization.GeoChart(document.getElementById('map_1556640291292')); 
+          google.visualization.events.addListener(chart, 'select', function() {
+          var selection = chart.getSelection();
+          if (selection.length == 1) {
+          var selectedRow = selection[0].row;
+          var selectedRegion = data.getValue(selectedRow, 0);
+          if(ivalue[selectedRegion] != '') { window.open(ivalue[selectedRegion]);  }
+          }
+          });
+         chart.draw(data, options);
+         }
+         window.onresize = function(event) {
+             drawVisualization();
+         };
+         </script>
+         <div id='map_1556640291292'></div>
+    <!-- </div> -->
+    
+</body>
+</html>
+

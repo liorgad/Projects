@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="Heading">Edit Airline Details</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true" (click)="activeModal.dismiss('Cross click')">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <!-- <form [formGroup]="editForm" novalidate (ngSubmit)="onUpdate()" autocomplete="on"> -->
+  <form [formGroup]="editForm" (ngSubmit)="onUpdate()" autocomplete="on">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" name="name" formControlName="name" class="form-control" id="name" placeholder="Enter Airline name">      
+    </div>
+
+    <div class="form-group">
+      <label for="images">Airline Image</label>
+      <input type="file" class="form-control" accept="image/*" multiple placeholder="Enter Airline Image" formControlName="image"
+        name="images" (change)="changeListener($event)">      
+    </div>
+  </form>
+</div>
+<flash-messages></flash-messages>
+<div class="modal-footer ">
+  <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" (click)="onUpdate()" [disabled]="editForm.pristine || editForm.invalid || !isImageLoaded"><span>
+      <i class="fa fa-check" aria-hidden="true"></i></span> Update</button>
+</div>

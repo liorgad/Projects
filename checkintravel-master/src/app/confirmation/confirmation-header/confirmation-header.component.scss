@@ -1,0 +1,7 @@
+@import '../../../styles.scss';
+
+.custom-shadow {
+    -webkit-box-shadow: 0px 7px 15px -5px rgba(0,0,0,0.38);
+    -moz-box-shadow: 0px 7px 15px -5px rgba(0,0,0,0.38);
+    box-shadow: 0px 7px 15px -5px rgba(0,0,0,0.38);
+}

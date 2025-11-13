@@ -1,0 +1,30 @@
+html,body {
+    box-sizing:border-box; 
+    height : 100%;  
+}
+
+/* *, .heb{
+    direction: rtl;
+    text-align: right;
+} */
+
+.color-gold{
+    color:#C4B454  ;
+}
+
+.color-blue{
+    color:#263260;
+}
+
+.headline-border{
+    border-top: 1px solid #263260;   
+}
+
+.bottom-border-gold{
+    border-bottom: 1px solid #C4B454;
+}
+
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+}

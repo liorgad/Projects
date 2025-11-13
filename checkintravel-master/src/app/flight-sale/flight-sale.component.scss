@@ -1,0 +1,25 @@
+@import "../../styles.scss";
+
+.sale-container{
+    position: relative;
+
+    section{
+        direction: rtl;
+        text-align: right;
+        position: absolute;
+        top: 3rem;
+        right: 7rem;
+
+        color: color(primary-blue);
+        font-weight: bold;
+        
+        .sale-dates{
+            font-size: 80%;
+        }
+
+        h4{
+            color:color(primary-gold);
+        }
+    }
+    
+}

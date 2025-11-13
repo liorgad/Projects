@@ -1,0 +1,36 @@
+@import '../../../styles.scss';
+
+
+.button-image-size{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.form-control:focus {  
+    background-color: #fff;
+    border-color: color(primary-gold);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(223, 214, 167);
+  }
+
+  .btn-primary:disabled {
+    color: #fff;
+    background-color: #dacc7d;
+    border-color: #dacc7d;
+  }
+  
+  //C4B454
+  
+  .btn-primary:hover:not([disabled]) {
+    color: #fff;
+    background-color: color(primary-blue);
+    border-color: color(primary-blue);
+  }
+  
+  .btn-primary:focus {  
+    border-color: color(primary-gold);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(228, 220, 184);
+  }
+
+  

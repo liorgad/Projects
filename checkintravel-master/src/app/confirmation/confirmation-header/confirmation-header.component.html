@@ -1,0 +1,16 @@
+<!-- <section class="border-margin headline-border bottom-border-gold"> -->
+<section class="border-margin headline-border bottom-border-gold custom-shadow">
+ <div *ngIf="isClient">
+    <div class="heb d-flex justify-content-start position-relative">
+      <app-client-results class="position-absolute mt-4"></app-client-results>
+    </div>
+ </div>
+  <div class="container text-center py-4">
+    <h1 class="color-gold"> !הזמנתך בוצעה בהצלחה</h1>
+    <div class="mt-5">
+      <h2>מספר הזמנה</h2>
+      <!-- <h2 class="color-gold"><span class="color-blue">A</span>01234567</h2> -->
+      <h2 class="color-gold">{{order.orderId}}</h2>
+    </div>
+  </div>
+</section>

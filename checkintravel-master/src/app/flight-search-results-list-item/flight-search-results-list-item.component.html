@@ -1,0 +1,98 @@
+<div class="row">
+  <!-- departing flight -->
+  <div class="col-5">
+    <div class="row">
+      <!-- airline logo -->
+      <div class="col-2">
+        <figure class="figure">
+          <!-- <img src="../../assets/images/logo/aegean_logo.jpg" class="figure-img img-fluid rounded" alt=""> -->
+          <img [src]="departureAirlineLogo" class="figure-img img-fluid rounded" alt="">
+        </figure>
+      </div>
+      <!-- flight direction and details -->
+      <div class="col">
+        <h5 class="text-size-40">טיסה הלוך</h5>
+        <div>
+          <h5 class="color-gold text-size-30">{{flight.departure.airlineName.name}}</h5>
+          <h6 class="color-gold text-size-30">{{flight.departure.flightId.airline}}
+            {{flight.departure.flightId.number}}</h6>
+          <p class="h6 color-blue text-size-30">{{flight.departure.origin.terminal}}</p>
+          <!-- <h4>14:45-15:45</h4> -->
+          <h4 class="text-size-30">
+            {{flight.departure.departure | date:'H:mm'}}-{{flight.departure.arrival | date:'H:mm'}}</h4>
+          <p class="color-gold text-size-34">כולל מזוודה עד 20 ק"ג</p>
+        </div>
+      </div>
+      <!-- number of seats -->
+      <div class="col">
+        <!-- <h5 class="color-gold text-size-36">{{flight.departure.seats-flight.departure.orderedSeats}} מקומות</h5> -->
+        <h5 class="color-gold text-size-36">{{flight.availableSeats.departure}} מקומות</h5>
+      </div>
+    </div>
+  </div>
+  <!-- order flight -->
+  <div class="col-2 flight-order">
+    <a (click)="onFlightClick()">
+      <div class="row h-100 justify-content-center align-items-center">
+        <div class="col-lg-4 text-left">
+          <!-- <h3><span class="order-price">{{flight.price}}$</span></h3> -->
+          <h3><span class="order-price">{{flightPrice}}$</span></h3>
+        </div>
+        <div class="col-lg-8">
+          <div (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+
+            <a target="_blank" rel="noopener noreferrer">
+              <figure class="figure">
+                <img [src]="orderImage" class="img-fluid mb-0" alt="">
+                <!-- <img src="../../assets/images/SIMBOLE-BLUE.png" class="figure-img img-fluid mb-0" alt=""
+                 onmouseover="this.src='../../assets/images/SIMBOLE-GOLD.png'"
+                  onmouseout="this.src='../../assets/images/SIMBOLE-BLUE.png'"> -->
+              </figure>
+            </a>
+
+            <div class="text-center h-100 color-gold order-text">
+              <h3>הזמן</h3>
+            </div>
+
+            <!-- <section class="text-center h-100 color-gold order-text">
+              <h3>הזמן</h3>
+            </section> -->
+
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  <!-- returning flight -->
+  <div class="col-5">
+    <div *ngIf="flight.return">
+      <div class="row">
+        <!-- airline logo -->
+        <div class="col-2">
+          <figure class="figure">
+            <!-- <img src="../../assets/images/logo/aegean_logo.jpg" class="figure-img img-fluid rounded" alt=""> -->
+            <img [src]="returnAirlineLogo" class="figure-img img-fluid rounded" alt="">
+          </figure>
+        </div>
+        <!-- flight direction and details -->
+        <div class="col">
+          <h5 class="text-size-40">טיסה חזור</h5>
+          <div>
+            <h5 class="color-gold text-size-30">{{flight.return.airlineName.name}}</h5>
+            <h6 class="color-gold text-size-30">{{flight.return.flightId.airline}} {{flight.return.flightId.number}}
+            </h6>
+            <p class="h6 color-blue text-size-30">{{flight.return.origin.terminal}}</p>
+            <!-- <h4>{{14:45}}-15:45</h4> -->
+            <h4 class="text-size-30">{{flight.return.departure | date:'H:mm'}}-{{flight.return.arrival | date:'H:mm'}}
+            </h4>
+            <p class="color-gold text-size-34">כולל מזוודה עד 20 ק"ג</p>
+          </div>
+        </div>
+        <!-- number of seats -->
+        <div class="col">
+          <h5 class="color-gold text-size-36">{{flight.availableSeats.return}} מקומות</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

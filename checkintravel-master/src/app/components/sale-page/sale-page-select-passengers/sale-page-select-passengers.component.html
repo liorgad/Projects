@@ -1,0 +1,51 @@
+<!-- <div id="flight-search" class="d-flex align-items-center p-3 w-100 border">
+  <form class="form-inline d-flex flex-row-reverse justify-content-center w-100 my-auto" [formGroup]="searchForm" (ngSubmit)="onSearchClick()">
+       
+    <div class="form-group">
+      <select class="form-control mr-sm-2 mb-0 heb drop-down-colors" name="adults" formControlName="adults">
+        <option selected disable>מבוגרים</option>
+        <option *ngFor="let passenger of passengers" [ngValue]="passenger">{{passenger}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <select class="form-control mr-sm-2 mb-0 heb drop-down-colors" name="infants" formControlName="infants">
+        <option selected disable>תינוקות</option>
+        <option *ngFor="let passenger of passengers" [ngValue]="passenger">{{passenger}}</option>
+      </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary btn-colors mr-sm-2 mt-2 mt-sm-0">
+      <span>
+        <img src="../../../assets/images/SIMBOLE-WHITE.png" class="img-fluid" alt="">
+      </span>  חפש  
+  </button>
+  </form>
+</div> -->
+<div id="flight-search" class="border select-passengers d-inline-flex align-items-center w-100 heb">
+  <form class="form-inline w-100" [formGroup]="selectPassengers" (ngSubmit)="onContinueClick()">
+    <div class="pr-5">
+      <select class="form-conrol drop-down-colors drop-down-width" name="adults" formControlName="adults">
+        <option selected disable>מבוגרים</option>
+        <option *ngFor="let passenger of passengers" [ngValue]="passenger">{{passenger}}</option>
+      </select>
+    </div>
+
+    <div class="pr-5">
+      <select class="form-conrol drop-down-colors drop-down-width" name="infants" formControlName="infants">
+        <option selected disable>תינוקות</option>
+        <option *ngFor="let passenger of passengers" [ngValue]="passenger">{{passenger}}</option>
+      </select>
+    </div>
+
+    <div class="mr-auto pl-5">
+      <button class="form-conrol" type="submit" class="btn btn-primary btn-colors">
+         המשך
+         <span>
+            <img src="../../../assets/images/SIMBOLE-WHITE.png" class="img-fluid" alt="" style="width:1rem;height: 1rem;">
+          </span>
+      </button>
+    </div>
+  </form>
+</div>

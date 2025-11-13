@@ -1,0 +1,19 @@
+{
+	"name": "hibob",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc",
+		"start": "ts-node index.ts"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^17.0.8"
+	},
+	"dependencies": {
+		"ts-node": "^10.9.1"
+	}
+}

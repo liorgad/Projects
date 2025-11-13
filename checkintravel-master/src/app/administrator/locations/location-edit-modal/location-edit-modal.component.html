@@ -1,0 +1,61 @@
+<!-- <ng4-loading-spinner [template]="template"> </ng4-loading-spinner> -->
+<div class="modal-header">
+  <h4 class="modal-title" id="Heading">Edit Location Details</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true" (click)="activeModal.dismiss('Cross click')">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editForm" (ngSubmit)="onUpdate()" autocomplete="on">
+
+    <div class="form-group">
+      <label for="countryHeb">Country Hebrew</label>
+      <input type="text" name="countryHeb" formControlName="countryHeb" class="form-control" id="countryHeb" placeholder="Enter Hebrew Name"
+        [ngClass]="{ 'is-invalid': submitted && f.countryHeb.errors }">
+      <div *ngIf="submitted && f.countryHeb.errors" class="invalid-feedback">
+        <div *ngIf="f.countryHeb.errors.required">Country Hebrew name is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="countryEng">Country Englsih</label>
+      <input type="text" name="countryEng" formControlName="countryEng" class="form-control" id="countryEng" placeholder="Enter English Name"
+        [ngClass]="{ 'is-invalid': submitted && f.countryEng.errors }">
+      <div *ngIf="submitted && f.countryEng.errors" class="invalid-feedback">
+        <div *ngIf="f.countryEng.errors.required">Country English name is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="airportHeb">Airport Hebrew</label>
+      <input type="text" name="airportHeb" formControlName="airportHeb" class="form-control" id="airportHeb" placeholder="Enter Hebrew Name"
+        [ngClass]="{ 'is-invalid': submitted && f.airportHeb.errors }">
+      <!-- <div *ngIf="submitted && f.airportHeb.errors" class="invalid-feedback">
+        <div *ngIf="f.airportHeb.errors.required">Country Hebrew name is required</div>
+      </div> -->
+    </div>
+
+    <div class="form-group">
+      <label for="airportEng">Airport English</label>
+      <input type="text" name="airportEng" formControlName="airportEng" class="form-control" id="airportEng" placeholder="Enter English Name"
+        [ngClass]="{ 'is-invalid': submitted && f.airportEng.errors }">
+      <div *ngIf="submitted && f.airportEng.errors" class="invalid-feedback">
+        <div *ngIf="f.airportEng.errors.required">Airport English name is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="terminal">Terminal</label>
+      <input type="text" name="terminal" formControlName="terminal" class="form-control" id="terminal" placeholder="Enter Terminal Name"
+        [ngClass]="{ 'is-invalid': submitted && f.terminal.errors }">
+      <!-- <div *ngIf="submitted && f.terminal.errors" class="invalid-feedback">
+        <div *ngIf="f.terminal.errors.required">Terminal name is required</div>
+      </div> -->
+    </div>
+  </form>
+</div>
+<flash-messages></flash-messages>
+<div class="modal-footer ">
+  <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" (click)="onUpdate()"><span>
+      <i class="fa fa-check" aria-hidden="true"></i></span> Update</button>
+</div>

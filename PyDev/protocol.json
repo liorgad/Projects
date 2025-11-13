@@ -1,0 +1,128 @@
+{
+    "how_are_you":{            
+        "text": "How are you?",
+        "options": [
+            {
+                "response" : "Great",
+                "next" : null
+            },
+            {"response":"Not bad",
+                "next":null},
+            {"response":"Bad","next":["did_you_go_to_the_doctor"]}
+            ]
+    },
+    "did_you_go_to_the_doctor":{   
+        
+        "text": "Did you go to the doctor?",
+        "options": [
+            {"response":"Yes","next":["what_kind_of_doctor_did_you_see"]},
+            {"response":"No","next":null}]
+    },
+    "what_kind_of_doctor_did_you_see":{   
+        
+        "text": "What kind of doctor did you see?",
+        "options": [
+            {"response":"primary care","next":["did_you_take_any_medicine"]},
+            {"response":"ophthalmologist","next":["do_you_suffer_from_any_of_these"]},
+            {"response":"cardiologist","next":["what_heart_condition_did_he_diagnose"]},
+            {"response":"endocrinologist","next":["do_you_suffer_from_any_of_these"]}
+            ]
+    },
+    "what_heart_condition_did_he_diagnose":{   
+        
+        "text": "What heart condition did he diagnose?",
+        "options": [
+            {"response":"A","next":null},
+            {"response":"B","next":null},
+            {"response":"I Don't know","next":["did_you_take_any_medicine"]}
+            ]
+    },
+    "did_you_take_any_medicine":{   
+        "text": "Did you take any medicine?",
+        "options": [
+            {"response":"Yes","next":null},
+            {"response":"No","next":null}     
+            ]
+    }
+    ,
+    "do_you_suffer_from_any_of_these":{           
+        "text": "Do you suffer from any of these?",
+        "options": [
+            {"response":"retinopathy","next":["did_you_see_an_ophthalmologist_for_your_retinopathy"]},
+            {"response":"nephropathy","next":["did_you_see_a_nephrologist_for_your_nephropathy"]},    
+            {"response":"diabetes","next":["what_kind_of_treatment_do_you_take_for_diabetes"]}     
+            ]
+    }
+    ,
+    "did_you_see_an_ophthalmologist_for_your_retinopathy":{   
+        "text": "Did you see an ophthalmologist for your retinopathy?",
+        "options": [
+            {"response":"Yes","next":["have_you_ever_suffered_from_storke_or_heart_attack"]},
+            {"response":"No","next":["have_you_ever_suffered_from_storke_or_heart_attack"]}     
+            ]
+    }
+    ,
+    "did_you_see_a_nephrologist_for_your_nephropathy":{   
+        "text": "Did you see a nephrologist for your nephropathy?",
+        "options": [
+            {"response":"Yes","next":["have_you_ever_suffered_from_storke_or_heart_attack"]},
+            {"response":"No","next":["have_you_ever_suffered_from_storke_or_heart_attack"]}     
+            ]
+    },
+    "did_you_see_a_neurologist_for_your_neuropathy":{   
+        "text": "Did you see a neurologist for your neuropathy?",
+        "options": [
+            {"response":"Yes","next":null},
+            {"response":"No","next":null}     
+            ]
+    },
+    "what_was_your_last_createnin_value":{   
+        "text": "What was your last creatinine value?",
+        "options": [
+            {"response":"<10","next":["have_you_ever_suffered_from_storke_or_heart_attack"]},
+            {"response":"10< <100","next":["have_you_ever_suffered_from_storke_or_heart_attack"]},
+            {"response":">100","next":["have_you_ever_suffered_from_storke_or_heart_attack"]}
+            ]
+    },
+    "what_kind_of_treatment_do_you_take_for_diabetes":{   
+        "text": "What kind of treatment do you take for diabetes? --select all that apply--",
+        "options": [
+            {"response":"No Medication","next":["do_you_suffer_from_any_of_the_following_complications_of_diabetes"]},
+            {"response":"Non-Insulin Medication","next":["what_non_insulin_medication_do_you_take"]},
+            {"response":"Insulin Medication","next":["what_insulin_medication_do_you_take"]}
+            ]
+    },
+    "what_non_insulin_medication_do_you_take":{   
+        "text": "What non insulin medication do you take",
+        "options": [
+            {"response":"A","next":["do_you_suffer_from_any_of_the_following_complications_of_diabetes"]},
+            {"response":"B","next":["do_you_suffer_from_any_of_the_following_complications_of_diabetes"]},
+            {"response":"C","next":["do_you_suffer_from_any_of_the_following_complications_of_diabetes"]}
+            ]
+    },
+    "what_insulin_medication_do_you_take":{   
+        "text": "What insulin medication do you take",
+        "options": [
+            {"response":"A","next":["do_you_suffer_from_any_of_the_following_complications_of_diabetes"]},
+            {"response":"B","next":["do_you_suffer_from_any_of_the_following_complications_of_diabetes"]},
+            {"response":"C","next":["do_you_suffer_from_any_of_the_following_complications_of_diabetes"]}
+            ]
+    },
+    "do_you_suffer_from_any_of_the_following_complications_of_diabetes":{   
+        "text": "Do you suffer from any of the following complications of diabetes? --select all that apply--",
+        "options": [
+            {"response":"Diabetic Neuropathy","next":["did_you_see_a_neurologist_for_your_neuropathy"]},
+            {"response":"Diabetic Nephropathy","next":["did_you_see_a_nephrologist_for_your_nephropathy"]},
+            {"response":"Diabetic Retinopathy","next":["did_you_see_an_ophthalmologist_for_your_retinopathy"]},
+            {"response":"Cardiomyopathy","next":["what_heart_condition_did_he_diagnose"]}
+            ]
+    },
+    "have_you_ever_suffered_from_storke_or_heart_attack":{   
+        "text": "Have you ever suffered from storke or heart attack?",
+        "options": [
+            {"response":"Yes","next":["did_you_see_a_neurologist_for_your_neuropathy"]},
+            {"response":"No","next":null}
+        ]        
+    }
+
+}

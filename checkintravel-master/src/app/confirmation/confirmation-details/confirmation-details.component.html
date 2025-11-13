@@ -1,0 +1,124 @@
+<section class="border-margin py-4 mt-5">
+
+  <div class="container text-center pt-4">
+    <div class="row">
+      <div class="col-lg-5 text-right">
+          <p class="h3 color-blue">{{orderData.flight.departure.destination.country.hebrewName}}</p>       
+      </div>
+      <div class="col-lg-2 text-center">
+        <!-- <i class="fa fa-refresh fa-4x symbol-color" aria-hidden="true"></i> -->
+        <img class="mx-5" src="../../assets/images/searchResults/gold_arrow.png" alt="roude arrows.png"
+          style="width:4rem;height:4rem;">
+      </div>
+      <div class="col-lg-5 text-left ">
+          <p class="h3 color-blue">{{orderData.flight.departure.origin.country.hebrewName}}</p> 
+      </div>
+    </div>
+    <div class="row mt-4 pb-5 mb-1">
+      <div class="col-lg-12 text-center">
+        <p class="h2 color-gold no-heb ">{{(hasDeparture? orderData.flight.departure.departure:'') |
+              date:'d.M.yy'}}{{hasReturnFlight? " - ":''}}{{(hasReturnFlight? orderData.flight.return.departure:'') | date:'d.M.yy'}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5 text-center">
+      <div *ngIf="hasReturnFlight">
+        <p class="h3 color-blue">{{orderData.flight.return.departure | date:'d.M.yy'}}</p>
+
+        <p class="h3 color-blue">{{orderData.flight.return.origin.country.hebrewName}} -
+          {{orderData.flight.return.destination.country.hebrewName}}</p>
+        <figure class="figure">
+          <img [src]="departureAirlineLogo" class="figure-img img-fluid mb-0 airline-logo" alt="">
+        </figure>
+
+        <p class="h4 color-gold">{{orderData.flight.return.airlineName.name}}</p>
+
+        <p class="h3 color-gold">{{orderData.flight.return.flightId.airline}}
+          {{orderData.flight.return.flightId.number}}</p>
+
+        <p class="h4 color-blue">{{orderData.flight.return.origin.airport.englishName}}<br>{{orderData.flight.return.origin.terminal}}</p>
+
+        <p class="h3 color-blue">{{orderData.flight.return.departure | date:'HH:mm'}} -
+          {{orderData.flight.return.arrival | date:'HH:mm'}}</p>
+
+      </div>
+    </div>
+    <div class="col-2 flight-price">
+      <div class="row flight-order">
+        <div class="col-lg-8 pr-0 ">
+          <figure class="figure">
+            <img [src]="image" class="img-fluid mb-0 image-size" alt="" style="width:10rem;height:10rem;">
+          </figure>
+          <section class="text-center h-100 color-gold font-weight-bold">
+            <h1 class="font-weight-bold">שולם</h1>
+          </section>
+        </div>
+        <div class="col-lg-4 pl-0 text-left">
+          <h2 class="mt-5 color-blue font-weight-bold bottom-border-price">{{orderData.flight.totalPrice}}$</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-5 text-center">
+
+      <p class="h3 color-blue">{{orderData.flight.departure.departure | date:'d.M.yy'}}</p>
+
+      <p class="h3 color-blue">{{orderData.flight.departure.origin.country.hebrewName}} -
+        {{orderData.flight.departure.destination.country.hebrewName}}</p>
+      <figure class="figure">
+        <img [src]="returnAirlineLogo" class="figure-img img-fluid mb-0 airline-logo" alt="">
+      </figure>
+
+      <p class="h4 color-gold">{{orderData.flight.departure.airlineName.name}}</p>
+
+      <p class="h3 color-gold">{{orderData.flight.departure.flightId.airline}}
+        {{orderData.flight.departure.flightId.number}}</p>
+
+      <p class="h4 color-blue">{{orderData.flight.departure.origin.airport.englishName}}<br>{{orderData.flight.departure.origin.terminal}}</p>
+
+      <p class="h3 color-blue">{{orderData.flight.departure.departure | date:'HH:mm'}} -
+        {{orderData.flight.departure.arrival | date:'HH:mm'}}</p>
+
+    </div>
+  </div>
+</section>
+<div class="border-margin mt-5 pb-5 bottom-border-gold headline-border">
+  <div class="container color-blue text-center mt-5">
+    <div class="">
+      <img *ngFor="let passenger of orderData.details.passengers" class="gender-size mx-1" [src]="getImage(passenger)"
+        alt="">
+    </div>
+    <div class="mt-4">
+      <div *ngFor="let passenger of orderData.details.passengers">
+        <h2 class="mt-1">
+          <span class="font-weight-bold">{{getTitle(passenger)}} </span>{{passenger.lastname | uppercase}} {{
+          passenger.firstname | uppercase }}
+        </h2>
+      </div>
+    </div>
+
+    <h4 class="mt-5">כרטיס ואישור הזמנה נשלחו לאימייל שעודכן</h4>
+  </div>
+</div>
+<div class="mt-5 d-flex justify-content-center border-margin">
+  <ng-container *ngIf="isClient; else elseTemplate">
+    <div class="position-relative">
+      <a [routerLink]="[ '/']">
+        <figure class="figure">
+          <img [src]="banner" class="img-fluid mb-0" alt="">
+        </figure>
+        <div class="heb summary position-absolute color-blue">
+          <app-client-summary [showHello]=false></app-client-summary>
+        </div>
+      </a>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <a [routerLink]="[ '/']" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+      <figure class="figure">
+        <img [src]="banner" class="img-fluid mb-0" alt="">
+      </figure>
+    </a>
+  </ng-template>
+</div>

@@ -1,0 +1,36 @@
+@import "../../styles.scss";
+
+section.slider-container {
+  position: relative;  
+}
+
+section {
+  position: relative;
+
+  .search-bar {
+    width: 100%;    
+    // bottom: 20%;
+    bottom: 108.2px;
+    position: absolute;
+    z-index: 9999;
+
+    .search-form{
+      width :1637px;
+    }
+  }
+}
+
+.search-margin{
+  margin-top : 108.5px;  
+}
+
+.search-margin-bottom{
+  margin-bottom : 71px;
+}
+
+:host ::ng-deep .custom-spinner-template {
+  height: 50% !important;
+  width: 50% !important;
+  top: 26% !important;
+  left: 24% !important;  
+}

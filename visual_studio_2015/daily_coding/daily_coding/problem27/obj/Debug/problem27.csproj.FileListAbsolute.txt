@@ -1,0 +1,6 @@
+d:\projects\visual_studio_2015\daily_coding\daily_coding\problem27\bin\Debug\problem27.exe.config
+d:\projects\visual_studio_2015\daily_coding\daily_coding\problem27\bin\Debug\problem27.exe
+d:\projects\visual_studio_2015\daily_coding\daily_coding\problem27\bin\Debug\problem27.pdb
+d:\projects\visual_studio_2015\daily_coding\daily_coding\problem27\obj\Debug\problem27.csprojResolveAssemblyReference.cache
+d:\projects\visual_studio_2015\daily_coding\daily_coding\problem27\obj\Debug\problem27.exe
+d:\projects\visual_studio_2015\daily_coding\daily_coding\problem27\obj\Debug\problem27.pdb

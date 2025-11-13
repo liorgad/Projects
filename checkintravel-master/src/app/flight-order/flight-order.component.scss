@@ -1,0 +1,10 @@
+@import '../../styles.scss';
+
+:host ::ng-deep .custom-spinner-template {
+    height: 254px !important;
+    width: 243px !important;
+    top: 40% !important;
+    left: 45% !important;
+    z-index : 9999;
+  }
+  

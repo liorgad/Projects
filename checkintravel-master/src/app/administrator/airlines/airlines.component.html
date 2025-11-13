@@ -1,0 +1,35 @@
+<div class="container-fluid mt-5">
+  <table class="table table-hover table-dark table-responsive ">
+    <thead class="thead-inverse">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>       
+        <th scope="col">Image</th>        
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let airline of airlines ; let i = index">
+        <td scope="row">{{i+1}}</td>
+       <td>{{airline.name}}</td>
+       <td><img src={{airline.img}} class="img-thumbnail" alt=""></td>
+        <td>
+          <p data-toggle="tooltip" title="Edit">
+            <button class="btn btn-primary btn-xs" (click)="openAirlineEditModal(airline)">
+              <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td>
+        <td>
+          <p data-toggle="tooltip" title="Delete">
+            <button class="btn btn-danger btn-xs" (click)="openAirlineDeleteModal(airline)">
+              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary" (click)="addAirline()">Add</button>
+</div>

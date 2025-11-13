@@ -1,0 +1,19 @@
+<div *ngIf="hasSales">
+  <div class="row sales-container mt-5 mb-5 py-3 px-5">
+    <div class="col-lg-4 pt-4">
+      <a (click)="onSaleClick(0)">
+        <app-flight-sale [flightSale]="flightComb[0]"></app-flight-sale>
+      </a>
+    </div>
+    <div class="col-lg-4 pt-4">
+      <a (click)="onSaleClick(1)">
+        <app-flight-sale [flightSale]="flightComb[1]" (click)="onSaleClick(1)"></app-flight-sale>
+      </a>
+    </div>
+    <div class="col-lg-4 pt-4">
+      <a (click)="onSaleClick(2)">
+        <app-flight-sale [flightSale]="flightComb[2]" (click)="onSaleClick(2)"></app-flight-sale>
+      </a>
+    </div>
+  </div>
+</div>

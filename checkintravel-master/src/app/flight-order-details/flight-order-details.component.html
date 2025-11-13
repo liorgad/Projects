@@ -1,0 +1,191 @@
+<div class="border-margin">
+  <form name="form" (ngSubmit)="f.form.valid && onPayment()" #f="ngForm" novalidate>
+    <div class="pt-5 pb-5 mt-5 bottom-border-gold heb">
+
+      <div class="form-group row">
+        <p class="form-text col-4 color-blue font-weight-bold">
+          אנא מלאו את פרטי הנוסעים באנגלית בלבד וכפי שמופיע בדרכון הנוסע.
+        </p>
+      </div>
+
+      <ul class="list-unstyled pr-0">
+        <li *ngFor="let item of passengers;let index = index;trackBy:trackByIndex;">
+          <div class="form-group row">
+            <div class="col-3 ">
+              <ng-container *ngIf="!passengers[index].isInfant; else elseTemplate">
+                <img class="gender-size" [src]="getMRGenderImage(passengers[index])" alt="" srcset=""
+                  (click)="onMRClicked(passengers[index])">
+                <img class="gender-size mr-2" [src]="getMSGenderImage(passengers[index])" alt="" srcset=""
+                  (click)="onMSClicked(passengers[index])">
+              </ng-container>
+              <ng-template #elseTemplate>
+                <img class="gender-size mr-2" [src]="getINFGenderImage(passengers[index])" alt="" srcset="">
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-3">
+              <input type="text" class="form-control set-colors" id="first-name" placeholder="שם פרטי" required
+                [(ngModel)]="passengers[index].firstname" name=firstname{{index}}>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-3">
+              <input type="text" name="last-name" id="last-name" class="form-control set-colors" placeholder="שם משפחה"
+                required [(ngModel)]="passengers[index].lastname" name=lastname{{index}}>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="form-group row">
+        <div class="col-4">
+          <input type="email" class="form-control set-colors" name="email" id="email" placeholder="אימייל"
+            [(ngModel)]="email" required email>
+          <!-- <div *ngIf="f.submitted && f.email.invalid" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-2">
+          <select class="form-control form-inline set-colors" name="country" id="country" [(ngModel)]="country">
+            <option selected>ישראל</option>
+          </select>
+        </div>
+
+        <div class="col-2">
+          <input type="tel" class="form-control form-inline set-colors" name="tel" id="tel" placeholder="טלפון"
+            [(ngModel)]="tel" required>
+          <!-- <div *ngIf="f.submitted && f.tel.invalid" class="invalid-feedback">
+            <div *ngIf="f.tel.errors.required">Phone is required</div>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-4">
+          <div class="form-check form-check-inline mr-0">
+            <input type="checkbox" class="form-check-input mr-0 mt-2 " id="exampleCheck1" [(ngModel)]="terms"
+              name="terms" required>
+          </div>
+          <label class="form-check-label mr-1 mt-2 color-blue" for="exampleCheck1">קראתי את תנאי האתר הכלליים ואת
+            תנאי
+            הביטול
+            ואני מסכים.</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-5 pb-5 mt-5 heb">
+      <div class="row">
+        <div class="col-6">
+          <div *ngIf="isClient">
+            <h3><span class="ml-2"><img src="../../../assets/images/SIMBOLE-BLUE.png" class="img-fluid img-size"
+                  alt=""></span>אשראי
+            </h3>
+          </div>
+          <div class="col-8">
+            <div class="form-group">
+              <ul class="list-inline p-0 credit-list">
+                <li class="list-inline-item"><img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAeCAYAAABqpJ3BAAAABHNCSVQICAgIfAhkiAAABLhJREFUWIXtmGtMFGcUhp9vdhaWBceyuCjFCwouIBhQ0agYMYKphraoMbZVY9T+0NQ/pbZpE2uTpknTJk1JWnszsdVqrVbTRpNeTDCtqRULoiAW2S1euClQdhfXZYHdYac/djtgtMVWE6Dx/TVzvnO+ed9z+WYyAsDhcCQCJZqm5WuaZmEYQwjhEkKcAIptNluLqKqqSjSbzTVxcXExiqIYZVkeao7/CFVV8Xg8AafT6fX5fNNls9lcEhcXN8pisQxv5mHIsozFYjECMUCJFAwGCxRFGRHkB0JRFGMwGCyQgNjh3jZ3Q5hzrDTURO4XDwUMNR4KGGrc9fhR/6hFddUj0EIGYcAwJh3Zkqz7+Lr9HC+9CEBUVARLCzL59vgF/H6VmOhIlizOACAY1Cgrv0xVTRNt7TcxGCTiraNY/8x8os2R+n7XGju48FszfWoQRYkiPy/9vwuQrdMwRMfT6zhG17ldEPAhRcQQu+EUiFDRDn1dwVsl3wGweeMi5s1J5oXthwBYON/GksUZ3PL2sH7Lbmrrrt/xjFVFOboAd6ePFWs/wNftByDCKFN5cgcREYMf73/rIcxjMGVv4tV9PWzOKsPSXU2f+woGS0pYQDkARtnAuqfm4qhv02OTJ1sBeOf94zr5x/IzKVg0Db9f5Vx1A6OVKN1/38EynTyAP6BSU9vCrOxJgwoYdAamZmZQtHMCbcaZqB2XADhz9gpXGzoAKFyaRfyYUTjqW/tjkscCUHWhUbctL5zBk8uyWFU0izdfW6lnt6cnwIEjZwCYN7u/Rc8PiL0vAXm5NvqCgqd3JdJwtRmAg0fK9fWNa+YDYB9QgalT4gGYmdWfwee27eelHYdpvu6+bf8jRytxd/oAeKV4mV6Zc9UND0ZAmi2BsVaFXhVKjgbocHop/akWCGUszZYAoFdACEFyWMDLzy9j9YrZCCHQNI1j31fx+Or3OP3rZSA04HsO/AJAVuYE0mwJZE+fCMD56gdUAYC83FQAfqxo59P9pwiofQBsWrdA9/n9cqgCiQmP6MNpMhl5Y/tyDu/ZQk52EgDdPX5ef/sYAD+cuEhTiwuAuTlTqHPcYGy8AoCrs4trjc4HJGCBDQBN09j75WkAkpOsLMwN2d2dXXi7egGwpYwLEw3o8dMzxvPhu+sQQgDg84UGdvfnP+s+n+w5SdGanXz1TYVuu5c2uqfP0HlzUjDKBgJqH2o4+xvW5urrN1pv6te2lNAAb9r6GQAZ6Y9ilA2UV15F00LvlcV5aZw5e4WLl1oAiImOJDLSqO/hcnehaRrnqxtZ+cTM+xcQbY4gZ0YSZRWh3rXERrO8cIa+3treLyA1XAFHfSvert47sliwaBrbtxWy9cUvdNvej58lMz1Rv1+1/iNqapuprG7A6fJiMhlve+kNhKirq9NSU1MHFdHh9OJyewFQFDPjwr0K4LnVQ2tbJwATx8dhMhlpanHT0NSB19uLpmmMHh3FlKR4Pe6voTfIBpKTrLc9q7Xdg8fjQwjB5ElWJEkgSeIOTna7/d4FDEfY7faR/zH3UMBQ438hwK2q6lDz+NcIc3ZLkiSVejyeEafA4/EEJEkqlX0+XzFQAIy4X4tAsYCR/XP3T6N8y7XxxywcAAAAAElFTkSuQmCC">
+                </li>
+                <li class="list-inline-item"><img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAeCAYAAABqpJ3BAAAABHNCSVQICAgIfAhkiAAABOFJREFUWIXVmF1MU2cYx3/ncA4t/dRWPhRECU07DKhoYIuZJFomQXAsuzHZsi3Ri+GyZHGZyZxuu+BCb4xemDi3ZDeDRU0Mm86wRYmZeuEEHImT0VKCfPnBV7GlhdLS7uLoxoXA230J/+RcnPR53vf3vH3e532fIwF4vd5s4HgikXAnEgkbi1iSJI1JktQM7Hc6nYNSe3t7tsFguGO3200Wi0VVFOV5M86rWCxGIBCIjo6OToTD4SLFYDAct9vtZpvNtrjJn0hRFGw2mwqYgONyPB4vt1gsSwJ+tiwWixqPx8tlYPliT5tn6Qnzcvl5g/xT/e2lj42M4G9sJHj5MpHeXuLBIEp6OmmFhVh37sRSWYkkz1qf+AwM/AR9P4C/AyaHQDWDeQ1kvwJrX4O09KQ5pM7OzoTL5RJ2iEciPKirY+jECeKh0Jx2OqeTnGPHWFZdDb0X4eYBeOyZe2DFCIUfwObPIEUnxOLxeJILIPrwIb6aGsK3bgnZI0m4vngDEw1i9gDpJVDxPRhWLmjq8XgQ3gMzoRC+qipxeCDFomfoqwYeNQu7wHALNFVBdO5/d7aEAxg8eJDw7dvCHMaS9eS9NYn9JdBnQiIu7Aqjv8Ktj4VMhVIo0tPDb04nxGLCDKkZOlRj5M93XQbk7RF2B0mB3V6w5M1p4vF4xKrQ2JkzyHo9OoeDKY+H1NxcmJkh4vM9G35tLo53+p49WKoVbBtg/HeYGp570uUF0H0Gig/OyyYUQPDqVZbV1JBXX493xw4cFy4w3tiI//x5FJuNsbNnSSsoIK24GOJxrNXVdL//NtZdrzPZ3kZ8IoiavZoMdwrm2gYIdMO9Rgg/AFmnldYVm2CiX1vxmWnYehquv/vvBBAdGMDidjPd349t925iw8NMeb3onU5MZWWYt23DWl3Ng7o6dA4Hkiyz+lQDU11dZHz0KWP19azYu5eZ/lboqodfDoB+Bbj2wJoaWLMLVlfA/Z/BmK1N6r8LoYEF2YQ3cVphIaHWVsxuNxGfjxSTCWtVFXqXi6muLibv3sVYUoIuP5+hkycxl5dj2LCB6P376NetY/DwYe0wG2nTBszaqoGb14IpF7rPgmKAts+hv0kLQEBCAag5OaQVFRFuayPQ1IQuP58Uu53Y6Kj2e2YmweZmDKWlqKtWYdi4kemeHkKtrfjPnUNfUEC4pYVY549QegS2fgk5FTDRBymp2jPcoqVW0Yfwwl7ttDbmLMgmlEKW7dvpra1lqqODRCzG46YmJm7cwLRlC7HxcSRZRl25Em9ZGUpmJgATTV9jfNlNtKeL4aM+CHaiDt6B6/dAVmCoRcv7jtPau78DfN9C5hbtDBjv0IJZQP9ZGc19z4Fe/1eVUq2gzxJ2Fy6jQimky8sjfd++JGaHvlPdPLoMj65oT2wiKXdYVzsv/FMJb+LsI0cwbNokDpBIoOZvxroect8Ek0PcFXsxlB4VMhUOIMVoxHHpEobSUmGOke/aiPAiqcuEXbTLXOUlUI1C5kk1NGpWFq5r18g6dAjZOP8EOqeT/IsXyfnmJlRcAOsCN17FCBs/gVevC91EnyrpfuCpZjc00319zAQC/3tDk3Q/sNiUVD+wWCUD/lgS9X2x6AmzX5Zl+UogEFhyEQQCgagsy1eUcDi8HygHltynRWC/BEv74+4fAxroUkHf2nEAAAAASUVORK5CYII=">
+                </li>
+              </ul>
+            </div>
+            <div class="form-group">
+              <input id="cc-number" name="cc-number" type="tel" class="form-control set-colors cc-number identified"
+                [(ngModel)]="cc_number" value="" data-val="true" data-val-required="Please enter the card number"
+                data-val-cc-number="Please enter a valid card number" autocomplete="cc-number" maxlength="16" minlength="16"
+                placeholder="מספר כרטיס אשראי">
+              <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group has-success">
+              <input id="cc-name" name="cc-name" type="text" class="form-control set-colors cc-name valid"
+                data-val="true" data-val-required="Please enter the name on card" autocomplete="cc-name"
+                aria-required="true" aria-invalid="false" aria-describedby="cc-name-error" [(ngModel)]="cc_holdername"
+                placeholder="שם בעל הכרטיס">
+              <span class="help-block field-validation-valid" data-valmsg-for="cc-name"
+                data-valmsg-replace="true"></span>
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <div class="form-group">
+                  <label for="cc-exp" class="control-label">תוקף</label>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <input id="cc-exp-month" name="cc-exp-month" type="tel" class="form-control set-colors cc-exp"
+                    value="" [(ngModel)]="cc_month" data-val="true"
+                    data-val-required="Please enter the card expiration month"
+                    data-val-cc-exp="Please enter a valid month" placeholder="חודש" autocomplete="cc-exp-month"
+                    maxlength="2" minlength="2" min="" max="12">
+                  <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="form-group">
+                  <input id="cc-exp-year" name="cc-exp-year" type="tel" class="form-control set-colors cc-exp" value=""
+                    [(ngModel)]="cc_year" data-val="true" data-val-required="Please enter the card expiration year"
+                    data-val-cc-exp="Please enter a valid year" placeholder="שנה" autocomplete="cc-exp-year"
+                    maxlength="2" minlength="2" min="0" max="99">
+                  <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="form-group d-inline-flex">
+                  <label for="cc-cvv-help">CVV</label>
+                  <a name="cc-cvv-help" class="mr-1" ngbPopover="3 הספרות בגב הכרטיס..."
+                    triggers="mouseenter:mouseleave">
+                    <i class="fa fa-question-circle fa-lg"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="col-3">
+                <div class="input-group">
+                  <input id="x_card_code" name="x_card_code" type="tel" class="form-control set-colors cc-cvc" value=""
+                    [(ngModel)]="cc_cvv" data-val="true" data-val-required="Please enter the security code"
+                    maxlength="3" minlength="3" data-val-cc-cvc="Please enter a valid security code" autocomplete="off"
+                    placeholder="CVV">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6" [ngClass]="{'client-border pr-5': isClient}">
+          <div *ngIf="isClient">
+            <h3><span class="ml-2"><img src="../../../assets/images/SIMBOLE-BLUE.png" class="img-fluid img-size"
+                  alt=""></span>קרדיט
+            </h3>
+            <div class="mt-5">
+              <div class="form-group row">
+                <input type="text" class=" set-colors form-control col-6" id="userName" placeholder="שם משתמש"
+                  name="userName" [(ngModel)]="username">
+              </div>
+              <div class="form-group row">
+                <input type="password" name="clientNum" id="clientNum" class=" set-colors form-control col-6"
+                  placeholder="סיסמא" name="clientNum" [(ngModel)]="password">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex mt-5" [ngClass]="{'justify-content-center': isClient}">
+        <button type="submit" class="btn btn-primary btn-colors mt-2 mt-sm-0"
+          [disabled]="f.form.pristine || f.form.invalid || !genderSelected || (!hasCreditDetails() && !hasClientDetails())">
+          <span>
+            <img src="../../assets/images/SIMBOLE-WHITE.png" class="img-fluid img-size" alt="">
+          </span> תשלום
+        </button>
+      </div>
+      <flash-messages></flash-messages>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,102 @@
+<div *ngIf="!isSiteManager">
+  <footer>
+    <div class="container-fluid bg">
+      <!-- <div class="container py-4"> -->
+      <div class="border-margin py-4">
+
+        <div class="row">
+
+          <div class="col-lg-3">
+            <div class="row mb-2">
+              <div class="col-lg-12">
+                צור קשר
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-lg-12">
+                050-5730400
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                054-2112427
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="mt-2">
+                  <a href="mailto: CHECKINTRAVEL.FLYING@GMAIL.COM" class="color-gold">CHECKINTRAVEL.FLYING@GMAIL.COM</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1">
+            <div class="row mb-2">
+              <div class="col-lg-12">
+                עקבו אחרנו
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-1">
+                <a target="_blank" rel="noopener noreferrer"><i class="fa fa-instagram color-gold"></i></a>
+              </div>
+              <div class="col-lg-1">
+                <a traget="_blank" rel="noopener noreferrer"><i class="fa fa-twitter color-gold"></i></a>
+              </div>
+              <div class="col-lg-1">
+                <a target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook-f color-gold"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+
+            <div class="row mb-2">
+              <div class="col-lg-12">
+                השארו מעודכנים
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-lg-10">
+                <input type="text" placeholder="דואר אלקטרוני" class="footer-input-style mt-2 w-100" [(ngModel)]="email">
+              </div>
+              <div class="col-lg-2">
+                <button type="button" class="btn button-style" (click)="registerMail()">
+                  הרשם
+                </button>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-lg-12">
+                <small class="">עדכנו את הפרטים ותקבלו עדכונים ומבצעים ישירות למייל שלכם.</small>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-1">
+
+          </div>
+          <div class="col-lg-2">
+            <div class="row mb-2">
+              <div class="col-lg-12">
+                <a [routerLink]="['/legal']" class="legal-color">תקנון</a>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-lg-12">
+                <a [routerLink]="['/privacy']" class="legal-color">מדיניות פרטיות</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

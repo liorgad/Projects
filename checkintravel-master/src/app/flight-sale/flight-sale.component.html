@@ -1,0 +1,31 @@
+<div class="sale-container" (mouseover)="onMouseOver()" (mouseout)="onMouseOut()">
+  <a target="_blank" rel="noopener noreferrer">
+    <figure class="figure">
+      <img [src]="saleImage" class="img-fluid mb-0" alt="">
+      <!-- <img src="../../assets/images/SIMBOLE-BLUE.png" class="figure-img img-fluid mb-0" alt="" 
+      onmouseover="this.src='../../assets/images/SIMBOLE-GOLD.png'"
+        onmouseout="this.src='../../assets/images/SIMBOLE-BLUE.png'"> -->
+    </figure>
+  </a>
+  <section>
+    <!-- <h4>לרנקה</h4> -->
+    <h4>{{flightSale.departure.destination.airport.hebrewName}}</h4>
+    <!-- <p>
+      3 לילות
+    </p> -->
+    <p *ngIf="hasReturn">
+      {{ getNightCount(flightSale.departure.departure,flightSale.return.departure) }} לילות
+    </p>
+    <!-- <p class="sale-dates">
+      15/11/2018 - 18/11/2018
+    </p> -->
+    <p class="sale-dates">
+      {{flightSale.departure.departure | date:'d/M/yy'}} {{hasReturn ? '-' :''}} {{(hasReturn ? flightSale.return.departure:'') | date:'d/M/yy'}}
+    </p>
+    <p>
+      החל מ-
+    </p>
+    <!-- <h4>330$</h4> -->
+    <h4>{{flightSale.salePrice}}$</h4>
+  </section>
+</div>

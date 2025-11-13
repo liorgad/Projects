@@ -1,0 +1,17 @@
+<div class="heb d-flex justify-content-center">
+  
+    <p class="h2">{{searchTerm.origin.country.hebrewName}}</p>  
+  
+    <!-- <i class="fa fa-refresh fa-4x symbol-color mx-5" aria-hidden="true"></i>   -->
+    <img class="mx-5" src="../../assets/images/searchResults/gold_arrow.png" alt="roude arrows.png" style="width:3rem;height:3rem;">
+  
+    <!-- <h2>לרנקה</h2> -->
+    <p class="h2">{{searchTerm.destination.country.hebrewName}}</p>
+  
+</div>
+<div class="row mt-4">
+  <div class="col-lg-12 text-center">
+    <!-- <h2 class="symbol-color">15.11.2018-18.11.2018</h2> -->
+    <h2 class="symbol-color ">{{(hasReturn? searchTerm.toDate:'') | date:'d.M.yy'}}{{hasReturn? " - ":''}}{{searchTerm.fromDate | date:'d.M.yy'}}</h2>
+  </div>
+</div>

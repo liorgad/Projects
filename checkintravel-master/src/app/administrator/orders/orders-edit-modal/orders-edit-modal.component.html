@@ -1,0 +1,68 @@
+<!-- <ng4-loading-spinner [template]="template"> </ng4-loading-spinner> -->
+<div class="modal-header">
+  <h4 class="modal-title" id="Heading">Edit Flight Details</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true" (click)="activeModal.dismiss('Cross click')">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <form [formGroup]="editForm" (ngSubmit)="onUpdate()" autocomplete="on">
+
+    <!-- <div class="form-group">
+      <label for="departure">Departure</label>
+      <select class="form-control dropdown" id="departure" formControlName="departure">
+        <option *ngFor="let flight of flights" [ngValue]="flight" [selected]="order.departure ? order.departure._id === flight.departure._id : false">{{flight.departure | date}} {{flight.flightId.airline+flight.flightId.number}}</option>
+      </select>
+    </div> -->
+
+    <div class="form-group">
+      <label for="combination">Combination</label>
+      <select class="form-control dropdown" id="combination" formControlName="combination">
+        <option *ngFor="let flight of flights" [ngValue]="flight" [selected]="order.flight._id === flight._id">
+          {{flight.departure.departure | date}} {{order.flight.return? '-':''}}{{(flight.return ? order.flight.return :
+          '')| date}}</option>
+      </select>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="direction">Direction</label>
+      <select class="form-control dropdown" id="direction" formControlName="direction">
+        <option *ngFor="let direction of directions"  [value]="direction">{{direction}}</option>
+      </select>
+    </div> -->
+
+    <!-- <div *ngIf="f.direction.value === 'two way'">
+      <div class="form-group">
+        <label for="return">Return</label>
+        <select class="form-control dropdown" id="return" formControlName="return">
+          <option *ngFor="let flight of flights" [ngValue]="flight" [selected]="order.return ? order.return._id === flight.departure._id : false">{{flight.departure | date}}  {{flight.flightId.airline+flight.flightId.number}}</option>
+        </select>
+      </div>
+   </div> -->
+
+    <div class="form-group">
+      <label for="customer">Customer</label>
+      <select class="form-control dropdown" id="customer" formControlName="customer">
+        <option *ngFor="let cust of customers" [ngValue]="cust" [selected]="order.customer ? order.customer.email === cust.email : false">{{cust.email}}
+          {{cust.manager}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="adults">Adults</label>
+      <input type="number" name="adults" class="form-control" formControlName="adults" id="adults" placeholder="Enter Adults Seats Number">
+    </div>
+
+    <div class="form-group">
+      <label for="infants">Infants</label>
+      <input type="number" name="infants" class="form-control" formControlName="infants" id="infants" placeholder="Enter Infants Seats Number">
+    </div>
+
+  </form>
+</div>
+<flash-messages></flash-messages>
+<div class="modal-footer ">
+  <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" (click)="onUpdate()"><span>
+      <i class="fa fa-check" aria-hidden="true"></i></span> Update</button>
+</div>

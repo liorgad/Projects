@@ -1,0 +1,56 @@
+<div class="container-fluid mt-5">
+  <table class="table table-hover table-dark table-responsive ">
+    <thead class="thead-inverse">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Id</th>
+        <!-- <th scope="col">Flight Id : AirLine</th> -->
+        <!-- <th scope="col">Flight Id : Number</th> -->
+        <th scope="col">Departure</th>
+        <!-- <th scope="col">Return</th> -->
+        <th scope="col">On Sale</th>
+        <th scope="col">Sale $</th>
+        <th scope="col">Price $</th>
+        <th scope="col">Cost $</th>
+        <th scope="col">Total Seats</th>
+        <!-- <th scope="col">Direction</th> -->
+        <th scope="col">Origin</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flight of flights ; let i = index">
+        <td scope="row">{{i+1}}</td>
+        <td>{{flight.flightId ? flight.flightId.airline+flight.flightId.number : '' | uppercase }}</td>
+        <!-- <td>{{flight.flightId.number}}</td> -->
+        <td>{{flight.departure | date}}</td>
+        <!-- <td>{{flight.return? flight.return : '' | date }}</td> -->
+        <td>{{flight.isOnSale}}</td>
+        <td>{{flight.salePrice}}</td>
+        <td>{{flight.price}}</td>
+        <td>{{flight.costPrice}}</td>
+        <td>{{flight.seats}}</td>
+        <!-- <td>{{flight.direction}}</td> -->
+        <td>{{getName(flight.origin)}}</td>
+        <td>{{getName(flight.destination)}}</td>
+        <td>
+          <p data-toggle="tooltip" title="Edit">
+            <button class="btn btn-primary btn-xs" (click)="openFlightEditModal(flight)">
+              <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td>
+        <td>
+          <p data-toggle="tooltip" title="Delete">
+            <button class="btn btn-danger btn-xs" (click)="openFlightDeleteModal(flight)">
+              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary" (click)="addFlight()">Add</button>
+</div>

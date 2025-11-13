@@ -1,0 +1,42 @@
+<div class="container mt-5">
+    <table class="table table-hover table-dark table-responsive ">
+      <thead class="thead-inverse">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Country Hebrew</th>
+          <th scope="col">Country English</th>
+          <th scope="col">Airport Hebrew</th>
+          <th scope="col">Airport English</th>
+          <th scope="col">Terminal</th>
+          <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let location of locations ; let i = index">
+          <td scope="row">{{i+1}}</td>
+          <td>{{isEmptyObject(location) ? '' : location.country.hebrewName}}</td>
+          <td>{{isEmptyObject(location) ? '' :location.country.englishName}}</td>
+          <td>{{isEmptyObject(location) ? '' :location.airport.hebrewName}}</td>
+          <td>{{isEmptyObject(location) ? '' :location.airport.englishName}}</td>
+          <td>{{location.terminal}}</td>
+          <td>
+            <p data-toggle="tooltip" title="Edit">
+              <button class="btn btn-primary btn-xs" (click)="openLocationEditModal(location)">
+                <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+              </button>
+            </p>
+          </td>
+          <td>
+            <p data-toggle="tooltip" title="Delete">
+              <button class="btn btn-danger btn-xs" (click)="openLocationDeleteModal(location)">
+                <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+              </button>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" (click)="addElement()">Add</button>
+  </div>
+  

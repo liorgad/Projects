@@ -1,0 +1,15 @@
+<section class="mx-5 headline-border border-margin">
+  <div *ngIf="isClient">
+    <div class="heb d-flex justify-content-start position-relative">
+      <app-client-results class="position-absolute mt-4"></app-client-results>
+    </div>
+  </div>
+  <div class="container text-center my-auto">
+    <div class="d-flex align-items-center justify-content-center h-100">
+      <app-flight-search-results-header></app-flight-search-results-header>
+    </div>
+  </div>
+</section>
+<div class="mx-5 mt-2">
+  <app-flight-search-results-list></app-flight-search-results-list>
+</div>

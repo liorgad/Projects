@@ -1,0 +1,22 @@
+<!-- <div class="heb headline-border bottom-border-gold border-margin py-4"> -->
+<div style="width:20rem;">
+  <p *ngIf="showHello" class="h3 font-weight-bold"><span>שלום</span>, {{name}} !</p>
+  <p class="font-weight-bold mt-3 mb-1">מצב הזמנות:</p>
+  <p class="mb-1">כרטיסים שהוזמנו :</p>
+  <ul class="list-unstyled p-0 m-0 heb">
+    <li *ngFor="let order of orders">
+      <div class="row p-0">
+        <div class="col-6">
+          {{order.flight.departure.departure | date:'d.MM.y'}}
+          {{order.flight.departure.destination.country.englishName}}-{{order.flight.departure.origin.country.englishName}}
+        </div>
+        <div class="col-6">
+          <p class="color-gold m-0"> {{order.orderedSeats}} מקומות </p>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <p class="mb-1">סה"כ {{sum}} מקומות</p>
+  <p class="font-weight-bold">יתרת קרדיט : {{remainingCredit}}$</p>
+</div>
+<!-- </div> -->

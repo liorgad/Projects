@@ -1,0 +1,23 @@
+<!-- <carousel  [showIndicators]="false">
+  <slide>
+    <img class="w-100 d-block" src="../../assets/images/landing-slide-images/home page.jpg" alt="first slide">
+  </slide>
+  <slide>
+    <img class="w-100 d-block" src="../../assets/images/landing-slide-images/home page_1.jpg" alt="second slide">
+  </slide>
+  <slide>
+    <img class="w-100 d-block" src="../../assets/images/landing-slide-images/home page_2.jpg" alt="third slide">
+  </slide>
+</carousel> -->
+
+<ngb-carousel *ngIf="images" [showNavigationArrows]="false" [showNavigationIndicators]="false">
+  <ng-template ngbSlide>
+    <img class="w-100 d-block" [src]="images[0]" alt="Random first slide">
+  </ng-template>
+  <ng-template ngbSlide>
+    <img class="w-100 d-block" [src]="images[1]" alt="Random first slide">
+  </ng-template>
+  <ng-template ngbSlide>
+    <img class="w-100 d-block" [src]="images[2]" alt="Random first slide">
+  </ng-template>
+</ngb-carousel>

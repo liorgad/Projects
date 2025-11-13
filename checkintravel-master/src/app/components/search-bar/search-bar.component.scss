@@ -1,0 +1,81 @@
+@import "../../../styles.scss";
+
+#flight-search {
+  // margin-top: 5rem;
+  background-color: color(primary-blue);
+  opacity: 0.85;
+  color: color(primary-gray);
+  height: 120px;
+  // direction: ltr;
+  // text-align: left;     
+
+  .btn-colors {
+    color: color(primary-gray);
+    background-color: color(primary-gold);
+    font-size: 1rem;
+    border-radius: 0 !important;
+    border-color: transparent;
+
+    img {
+      color: color(primary-gray);
+      width: 1rem;
+      height: 1rem;
+      overflow: hidden;
+    }
+  }
+
+  .drop-down-colors {
+    color: color(primary-gold);
+    border-color: color(primary-gold);
+    background-color: color(primary-blue);
+    font-size: 1rem;
+    border-radius: 0 !important;
+  }
+
+  .dropdown {
+    .dropdown-item {
+      color: color(primary-gold);
+      border-color: color(primary-gold);
+    }
+  }
+
+  .calendar {
+    color: color(primary-gold);
+    border-color: color(primary-gold);
+    background-color: transparent;
+    border-radius: 0 !important;
+  }
+
+  .calendar-text {
+    color: color(primary-gray) !important;
+  }
+
+  .no-border {
+    border: 0;
+  }
+
+  .swap-colors {
+    color: color(primary-gray);
+    border: 0;
+    font-size: 1rem;
+    background-color: transparent;
+  }
+
+  .btn-calendar {
+    color: color(primary-gray);
+    background-color: color(primary-gold);
+    border-color: color(primary-gold);
+    /*set the color you want here*/
+  }
+
+  .btn-calendar:hover,
+  .btn-calendar:focus,
+  .btn-calendar:active,
+  .btn-calendar.active,
+  .open>.dropdown-toggle.btn-calendar {
+    color:color(primary-gray);
+    background-color: color(primary-blue);
+    border-color: color(primary-blue);
+    /*set the color you want here*/
+  }
+}

@@ -1,0 +1,79 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap-grid.scss";
+@import "~bootstrap/scss/bootstrap-reboot.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome.scss";
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+// @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+$colors: (
+    //primary-gray: #F1F2F2,
+    primary-gray : white,
+    primary-blue: #263260,
+    primary-gold: #C4B454 
+    
+);
+
+@function color($color-name) {
+    @return map-get($colors, $color-name)
+};
+
+$fonts : (
+    hebrew : 'Fira Sans'
+);
+
+@function font($lang){
+    @return map-get($fonts,$lang)
+};
+
+html,body {
+    box-sizing:border-box; 
+    height : 100%;    
+}
+
+.heb{
+    direction: rtl;
+    text-align: right;
+}
+
+.color-gold{
+    color: color(primary-gold);
+}
+
+.color-blue{
+    color: color(primary-blue);
+}
+
+.headline-border{
+    border-top: 1px solid color(primary-blue);
+    //border-bottom: 1px solid color(primary-blue);
+}
+
+.bottom-border-gold{
+    border-bottom: 1px solid color(primary-gold);
+}
+
+.input-style{
+    background-color: white;
+    border-color: color(primary-gold);
+    border-radius: 0;
+    color : color(primary-blue);
+}
+
+.button-style{
+    color : white;
+    border-radius: 0;
+    background-color: color(primary-gold);
+    border-color: color(primary-gold);
+}
+
+.logo-style{
+    background-color: color(primary-gray);
+}
+
+.border-margin{
+    margin-left : 141px;
+    margin-right : 141px;
+}

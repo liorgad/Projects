@@ -1,0 +1,68 @@
+@import "../../styles.scss";
+
+#flight-search {
+  // margin-top: 5rem;
+  background-color: color(primary-blue);
+  // opacity: 1;
+  color: color(primary-gold);
+  direction: ltr;
+  text-align: left;  
+
+  .btn-colors {
+    color: color(primary-gray);
+    background-color: color(primary-gold);
+    font-size: 1rem;
+    border-radius: 0 !important;
+  }
+
+  .drop-down-colors {
+    color: color(primary-gold);
+    border-color: color(primary-gold);
+    background-color: color(primary-blue);    
+    font-size: 1rem;
+    border-radius: 0 !important;
+  }
+
+  .dropdown {
+    .dropdown-item {
+      color: color(primary-gold);
+      border-color: color(primary-gold);      
+    }
+  }
+
+  .calendar{
+    color: color(primary-gold);
+    border-color: color(primary-gold);
+  }
+
+  .no-border{
+    border : 0;
+  }  
+}
+
+.form-control:focus {  
+  background-color: #fff;
+  border-color: color(primary-gold);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgb(223, 214, 167);
+}
+
+.btn-primary:disabled {
+  color: #fff;
+  background-color: #dacc7d;
+  border-color: #dacc7d;
+}
+
+//C4B454
+
+.btn-primary:hover:not([disabled]) {
+  color: #fff;
+  background-color: color(primary-blue);
+  border-color: color(primary-blue);
+}
+
+.btn-primary:focus {  
+  border-color: color(primary-gold);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgb(228, 220, 184);
+}

@@ -1,0 +1,24 @@
+@import '../../../styles.scss';
+
+/* Container holding the image and the text */
+.container {
+  position: relative;
+  text-align: center;
+  color: transparent;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 55%;
+  left: 44%;
+  transform: translate(-50%, -50%);
+  color : color(primary-gold);
+}
+
+.back-to-orders-text{
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+

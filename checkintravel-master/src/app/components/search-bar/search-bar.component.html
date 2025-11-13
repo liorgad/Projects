@@ -1,0 +1,86 @@
+<div id="flight-search" class="d-flex align-items-center p-2 w-100">
+  <form class="form-inline d-flex flex-row-reverse justify-content-center w-100 my-auto" [formGroup]="searchForm" (ngSubmit)="onSearchClick()">
+
+    <div class="form-group">
+      <select class="form-control mr-sm-2 mb-0 heb drop-down-colors" name="origin" formControlName="origin">
+        <option selected disable>מקור</option>
+        <!-- <option *ngFor="let location of locations" [ngValue]="location">{{getName(location)}}</option> -->
+        <option *ngFor="let location of locations" [ngValue]="location">{{location.country.hebrewName}} ({{location.country.englishName}})</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <!-- <button type="button" name="swap" id="swap" class="btn btn-primary mr-sm-2 mt-2 mt-sm-0 swap-colors" (click)="onSwapOrgiginDest()">
+        <i class="fa fa-refresh fa-2x" aria-hidden="true"></i>
+      </button> -->
+      <button type="button" name="swap" id="swap" class="btn btn-primary mr-sm-2 mt-2 mt-sm-0 swap-colors" (click)="onSwapOrgiginDest()">
+        <img src="../../../assets/images/search-bar/חץ-חילוף-לבן.png" alt="roude arrows.png" style="width:1.5rem;height:1.5rem;">
+      </button>
+    </div>
+
+    <div class="form-group">
+      <select class="form-control mr-sm-2 mb-0 heb drop-down-colors" name="destination" formControlName="destination">
+        <option selected disable>יעד</option>
+        <!-- <option *ngFor="let location of locations" [ngValue]="location">{{getName(location)}}</option> -->
+        <option *ngFor="let location of locations" [ngValue]="location">{{location.country.hebrewName}} ({{location.country.englishName}})</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <div class="input-group mr-sm-2 mb-0">
+        <input class="form-control drop-down-colors heb calendar-text" placeholder="הלוך" name="dp" ngbDatepicker #d="ngbDatepicker" formControlName="fromDate"
+          [firstDayOfWeek]=0 [footerTemplate]="footerTemplate">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <ng-template #footerTemplate>
+        <div class="btn-group btn-group-toggle w-100" ngbRadioGroup name="radioBasic">
+          <label ngbButtonLabel class="btn-calendar btn-colors btn-sm m-2 float-left">
+            <input ngbButton type="radio" [value]=1 (click)="onRadioClick(1)">כיוון אחד
+          </label>
+          <label ngbButtonLabel class="btn-calendar btn-colors btn-sm m-2 float-right">
+            <input ngbButton type="radio" [value]=2 (click)="onRadioClick(2)"> חזור
+          </label>
+        </div>
+      </ng-template>
+    </div>
+
+    <div *ngIf="radioModel==2">
+      <div class="form-group">
+        <div class="input-group mr-sm-2 mb-0">
+          <input class="form-control drop-down-colors heb calendar-text" placeholder="חזור" name="dpReturn" ngbDatepicker #dpReturn="ngbDatepicker"
+            formControlName="toDate" [firstDayOfWeek]=0>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dpReturn.toggle()" type="button">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <select class="form-control mr-sm-2 mb-0 heb drop-down-colors calendar-text" name="adults" formControlName="adults">
+        <option selected disable>מבוגרים</option>
+        <option *ngFor="let passenger of passengers" [ngValue]="passenger">{{passenger}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <select class="form-control mr-sm-2 mb-0 heb drop-down-colors calendar-text" name="infants" formControlName="infants">
+        <option selected disable>תינוקות</option>
+        <option *ngFor="let passenger of passengers" [ngValue]="passenger">{{passenger}}</option>
+      </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary btn-colors mr-sm-2 mt-2 mt-sm-0">
+      <span>
+        <img src="../../../assets/images/SIMBOLE-WHITE.png" class="img-fluid" alt="">
+      </span>  חפש  
+  </button>
+  </form>
+</div>

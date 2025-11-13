@@ -1,0 +1,125 @@
+<!-- <div class="container"> -->
+<div id="flight-search" class="justify-content-between w-100 p-4">
+  <div class="row">
+    <div class="col-lg-1">
+      <button type="button" class="btn btn-outline-warning w-100 h-100 btn-colors" (click)="onClickSearch()">חפש 
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <!-- Passengers -->
+    <div class="col-lg-2">
+      <div class="dropdown h-100">
+        <button class="btn btn-secondary dropdown-toggle w-100 h-100 drop-down-colors text-right" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{selectedPassengers? selectedPassengers : "נוסעים"}}
+        </button>
+        <div class="dropdown-menu drop-down-colors" aria-labelledby="dropdownMenuButton">
+          <a *ngFor="let passenger of passengers" (click)="onSelectedPassenger(passenger)" class="dropdown-item">{{passenger}}</a>
+          <!-- <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a> -->
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-2 px-sm-1">
+      <!-- <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
+
+      <div class="input-group w-100 h-100">
+        <input class="form-control h-100 drop-down-colors" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="dp"  [dayTemplate]="t" [footerTemplate]="footerTemplate">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">            
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <ng-template #footerTemplate>
+        <div class="btn-group btn-group-toggle w-100" ngbRadioGroup name="radioBasic" [(ngModel)]="radioModel">
+          <label ngbButtonLabel class="btn-primary btn-sm m-2 float-left">
+            <input ngbButton type="radio" [value]=1 (click)="onOneWayClick">One Way
+          </label>
+          <label ngbButtonLabel class="btn-primary btn-sm m-2 float-right">
+            <input ngbButton type="radio" [value]=2  (click)="onTwoWayClick"> Two Way
+          </label>
+        </div>
+      </ng-template>
+      <ng-template #t let-date let-focused="focused">
+        <span class="custom-day"
+              [class.focused]="focused"
+              [class.range]="isRange(date)"
+              [class.faded]="isHovered(date) || isInside(date)"
+              (mouseenter)="hoveredDate = date"
+              (mouseleave)="hoveredDate = null">
+          {{ date.day }}
+        </span>
+      </ng-template>      
+
+    </div>
+
+    <!-- destination -->
+    <div class="col-lg-3">
+      <div ngbDropdown class="d-inline-block h-100 w-100">
+        <button class="btn btn-outline-primary w-100 h-100 drop-down-colors" id="dropdownBasic1" ngbDropdownToggle>
+          {{selectedDestination ? getName(selectedDestination) : "יעד"}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="drop-down-colors">
+          <button class="dropdown-item" (click)="onSelectedDestination(location)" *ngFor="let location of locations">
+            <!-- {{location.country.hebrewName}}, {{location.airport.hebrewName}} -->
+            {{getName(location)}}
+          </button>
+        </div>
+      </div>
+
+      <!-- <div class="dropdown h-100">
+          <button class="btn btn-secondary dropdown-toggle w-100 h-100 drop-down-colors " type="button" id="dropdownMenuButton"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{selectedDestination}}
+          </button>
+          <div class="dropdown-menu drop-down-colors" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" (click)="onSelectedDestination(location)" *ngFor="let location of locations">{{location.country.hebrewName}},
+              {{location.airport.hebrewName}}</a>
+          </div>
+        </div> -->
+    </div>
+
+    <!-- Replace Origin and Destination -->
+    <div class="col-lg-1 px-sm-1">
+      <button type="button" class="btn btn-secondary w-100 h-100 drop-down-colors no-border" (click)="onSwapOrgiginDest()">
+        <i class="fa fa-refresh fa-3x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- Origin -->
+    <div class="col-lg-3 ">
+      <div ngbDropdown class="d-inline-block h-100 w-100">
+        <button class="btn btn-outline-primary w-100 h-100 drop-down-colors" id="dropdownBasicOrig" ngbDropdownToggle>
+          {{selectedOrigin ? getName(selectedOrigin) : "מקור"}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasicOrig" class="drop-down-colors">
+          <button class="dropdown-item" (click)="onSelectedOrigin(location)" *ngFor="let location of locations">
+            <!-- {{location.country.hebrewName}}, {{location.airport.hebrewName}} -->
+            {{getName(location)}}
+          </button>
+        </div>
+      </div>
+
+      <!-- <div class="dropdown h-100">
+        <button class="btn btn-secondary dropdown-toggle w-100 h-100 drop-down-colors" type="button" id="dropdownMenuButton"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">          
+          {{selectedOrigin ? getName(selectedOrigin) : "מקור"}}
+        </button>
+        <div class="dropdown-menu drop-down-colors" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" *ngFor="let location of locations" (click)="onSelecteOrigin(location)">
+             {{location.country.hebrewName}}, {{location.airport.hebrewName}}
+            getName(location)
+          </a>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+<!-- </div> -->

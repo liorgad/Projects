@@ -1,0 +1,107 @@
+<!-- <div class="modal-header">
+  <h4 class="modal-title">Modal Title</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  </button>
+</div>
+<div class="modal-body">
+  <p>My modal content</p>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.dismiss('Close clicked')">
+    Close Clicked
+  </button>
+</div> -->
+
+
+<!-- <ng4-loading-spinner [template]="template"> </ng4-loading-spinner> -->
+<div class="modal-header">
+  <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="activeModal.dismiss('Cross click')"><span
+      aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i></span></button>   -->
+  <h4 class="modal-title" id="Heading">Edit User</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true" (click)="activeModal.dismiss('Cross click')">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="editForm" novalidate (ngSubmit)="onUpdate()" autocomplete="on">
+    <flash-messages></flash-messages>
+    <div class="form-group">
+      <label for="manager">Manager</label>
+      <input type="text" name="manager" formControlName="manager" class="form-control" id="manager"
+        placeholder="Enter Manager Name" [ngClass]="{ 'is-invalid': f.manager.errors }">
+      <!-- [ngClass]="{ 'is-invalid': submitted && f.manager.errors }"> -->
+      <!-- <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback"> -->
+      <div *ngIf="f.manager.errors" class="invalid-feedback">
+        <div *ngIf="f.manager.errors.required">Manager Name is required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" formControlName="email" class="form-control" id="email"
+        autocomplete="username email" aria-describedby="emailHelp" placeholder="Enter Email"
+        [ngClass]="{ 'is-invalid': f.email.errors }">
+      <!-- [ngClass]="{ 'is-invalid': submitted && f.email.errors }"> -->
+      <div *ngIf="f.email.errors" class="invalid-feedback">
+        <!-- <div *ngIf="submitted && f.email.errors" class="invalid-feedback"> -->
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+      </div>
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" name="password" formControlName="password" class="form-control" id="password" autocomplete="current-password"
+        placeholder=" Enter Password" [ngClass]="{ 'is-invalid': f.password.errors }">
+        <!-- placeholder=" Enter Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"> -->
+        <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback"></div> -->
+      <div *ngIf="f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="userRole">Roles</label>
+      <select class="form-control dropdown" id="userRole" formControlName="roles">
+          <!-- <option selected disable>{{user.role? user.role.name : ""}}</option> -->
+        <option *ngFor="let role of roles" [ngValue]="role" [selected]="!isNew && user.role.name == role.name">{{role.name}}</option>
+      </select>
+    </div>    
+
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="tel" name="phone" class="form-control" formControlName="phone" id="phone"
+        placeholder="Enter Phone Number">
+    </div>
+
+    <div class="form-group">
+      <label for="seatLimit">Seats Limit</label>
+      <input type="number" name="seatLimit" class="form-control" formControlName="seatLimit" id="seatLimit"
+        placeholder="Enter Seats Limit">
+    </div>
+
+    <div class="form-group">
+      <label for="fixedPrice">Fixed Price</label>
+      <input type="number" name="fixedPrice" class="form-control" formControlName="fixedPrice" id="fixedPrice"
+        placeholder="Enter Fixed Price">
+    </div>
+
+    <div class="form-group">
+      <label for="currentPrice">Current Price </label>
+      <input type="number" name="currentPrice" class="form-control" formControlName="currentPrice" id="currentPrice"
+        placeholder="Enter Current Price">
+    </div>
+
+    <div class="form-group">
+      <label for="initialCredit">Credit</label>
+      <input type="number" name="initialCredit" class="form-control" formControlName="initialCredit" id="initialCredit"
+        placeholder="Enter Credit">
+    </div>
+  </form>
+</div>
+<div class="modal-footer ">
+  <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" (click)="onUpdate()"><span>
+      <i class="fa fa-check" aria-hidden="true"></i></span> Update</button>
+</div>

@@ -1,0 +1,67 @@
+@import "../../styles.scss";
+
+.bg {
+  background-color: color(primary-gray);
+  text-align: right;
+}
+
+.font-color {
+  color: color(primary-blue) !important;
+}
+
+.ml-auto .dropdown-menu {
+  left: auto !important;
+  right: 0px;    
+}
+
+
+nav {
+  height: 145px;
+  background-color: color(primary-gray);
+  
+  .navbar-brand {  
+    // the logo is 2685 width on 821 height so the ratio is 3.3 : 1
+    img {
+      width: 15rem;
+      height: 4.5rem;
+      overflow: hidden;
+    }
+  }
+  
+
+  ul {
+    // font-family: font(hebrew);
+    font-size: 1.125rem;      
+
+    li{      
+      a{
+        img{
+          height: 1.5rem; 
+          width: 1.5rem;                
+        }
+      }
+
+    }    
+  }
+
+  .nav-link{
+    font-size: 1.125rem;
+    :hover{
+      cursor: pointer !important;
+    }
+  }
+
+  .dropdown-menu{
+    a:hover{
+      background-color: color(primary-blue);
+      color: white !important;
+      
+    }
+  }
+}
+
+.border-margin{
+  margin-left: 141px;
+  margin-right : 141px;
+}
+

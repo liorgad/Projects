@@ -1,0 +1,55 @@
+<div class="container-fluid mt-5">
+  <table class="table table-hover table-dark table-responsive ">
+    <thead class="thead-inverse">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Id</th>        
+        <th scope="col">Departure</th>
+        <th scope="col">Return</th>
+        <th scope="col">On Sale</th>
+        <th scope="col">Sale $</th>
+        <th scope="col">Price $</th>
+        <th scope="col">Cost $</th>
+        <!-- <th scope="col">Total Seats</th>         -->
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Orders</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flight of flightCombinations ; let i = index">
+        <td scope="row">{{i+1}}</td>
+        <td>{{flight.id}}</td>  
+        <td>{{flight.departure ? flight.departure.flightId.airline+flight.departure.flightId.number : ''}}  {{(flight.departure ? flight.departure.departure : '') | date:'medium'}}</td>
+        <td>{{flight.return ? flight.return.flightId.airline+flight.return.flightId.number : ''}}  {{(flight.return ? flight.return.departure : '') | date:'medium'}}</td>
+        <td>{{flight.isOnSale}}</td>
+        <td>{{flight.salePrice}}</td>
+        <td>{{flight.price}}</td>
+        <td>{{flight.costPrice}}</td>
+        <!-- <td>{{flight.seats}}</td> -->
+        <td>
+          <p data-toggle="tooltip" title="Edit">
+            <button class="btn btn-primary btn-xs" (click)="openFlightEditModal(flight)">
+              <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td>
+        <td>
+          <p data-toggle="tooltip" title="Delete">
+            <button class="btn btn-danger btn-xs" (click)="openFlightDeleteModal(flight)">
+              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td>
+        <td>
+          <p data-toggle="tooltip" title="Orders">
+            <button class="btn btn-success btn-xs" (click)="onCreateOrdersList(flight)">
+              <span><i class="fa fa-plane" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary" (click)="addFlight()">Add</button>
+</div>

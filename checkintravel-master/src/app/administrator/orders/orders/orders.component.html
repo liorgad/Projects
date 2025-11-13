@@ -1,0 +1,43 @@
+<div class="container-fluid mt-5">
+  <table class="table table-hover table-dark table-responsive ">
+    <thead class="thead-inverse">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Order Id</th>        
+        <th scope="col">Departure</th>
+        <th scope="col">Return</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Seats</th>       
+        <th scope="col">Order Date</th>
+        <!-- <th scope="col">Edit</th> -->
+        <!-- <th scope="col">Delete</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders ; let i = index">
+        <td scope="row">{{i+1}}</td>
+        <td>{{order.orderId}}</td>        
+        <td>{{(order.flight.departure ? order.flight.departure.departure  : '') | date}}</td>
+        <td>{{(order.flight.return ? order.flight.return.departure  : '') | date}}</td>
+        <td>{{order.customer ? order.customer.email : 'private'}}  ({{order.customer ? order.customer.manager:''}})</td>
+        <td>{{order.details.passengers.length}}</td>                
+        <td>{{order.order_dt | date}}</td>
+        <!-- <td>
+          <p data-toggle="tooltip" title="Edit">
+            <button class="btn btn-primary btn-xs" (click)="openOrderEditModal(order)">
+              <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td> -->
+        <!-- <td>
+          <p data-toggle="tooltip" title="Delete">
+            <button class="btn btn-danger btn-xs" (click)="openOrderDeleteModal(order)">
+              <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+            </button>
+          </p>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+  <!-- <button type="button" class="btn btn-primary" (click)="addOrder()">Add</button> -->
+</div>

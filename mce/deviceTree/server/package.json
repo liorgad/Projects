@@ -1,0 +1,22 @@
+{
+  "name": "mce",
+  "version": "1.0.0",
+  "description": "mce Device Tree Exercise ",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lior Gad",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^12.12.7",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "node-hid": "^0.7.9",
+    "path": "^0.12.7",
+    "usb": "^1.6.1",
+    "usb-detection": "^4.5.0"
+  }
+}

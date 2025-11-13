@@ -1,0 +1,22 @@
+@import "../../styles.scss";
+
+section{
+    text-align: right;
+
+    p {
+        font-size: 1.5rem;
+    }
+}
+
+figure{
+    margin-top : 170px;
+    width:100%;
+    img{
+        width:1640px;
+        height : 502px;        
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin-bottom: 71.3px;
+    }
+}

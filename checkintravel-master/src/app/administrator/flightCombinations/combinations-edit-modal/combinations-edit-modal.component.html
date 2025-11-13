@@ -1,0 +1,67 @@
+<!-- <ng4-loading-spinner [template]="template"> </ng4-loading-spinner> -->
+<div class="modal-header">
+  <h4 class="modal-title" id="Heading">Edit Combinaton Details</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true" (click)="activeModal.dismiss('Cross click')">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <!-- <form [formGroup]="editForm" novalidate (ngSubmit)="onUpdate()" autocomplete="on"> -->
+  <form [formGroup]="editForm" (ngSubmit)="onUpdate()" autocomplete="on">
+
+    <!-- Departure -->
+    <div class="form-group">
+      <label for="departure">Departure</label>
+      <select class="form-control dropdown" id="departure" formControlName="departure">
+          <option selected disable>{{getFlightName(flightComb.departure)}}</option>
+        <option *ngFor="let flight of oneWayFlights" [ngValue]="flight">{{getFlightName(flight)}}</option>
+      </select>
+    </div>
+
+    <!-- Return -->
+
+    <div class="form-group">
+      <label for="arrival">Return</label>
+      <select class="form-control dropdown" id="arrival" formControlName="arrival">
+          <option selected disable>{{getFlightName(flightComb.return)}}</option>
+        <option *ngFor="let flight of oneWayFlights" [ngValue]="flight" [selected]="">{{getFlightName(flight)}}</option>
+      </select>
+    </div>    
+
+    <!-- <div class="form-group">
+      <label for="costPrice">Cost Price</label>
+      <input type="number" name="costPrice" class="form-control" formControlName="costPrice" id="costPrice" placeholder="Enter Cost Price">
+    </div> -->
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" name="price" class="form-control" formControlName="price" id="price" placeholder="Enter Price">
+    </div>
+
+    <div class="form-check">
+      <label class="is-on-sale">
+        <input type="checkbox" class="form-check-input" name="isOnSale" id="isOnSale" value="checkedValue" formControlName="isOnSale">
+        Sale
+      </label>
+    </div>
+
+    <div *ngIf="f.isOnSale.value">
+      <div class="form-group">
+        <label for="salePrice">Sale Price</label>
+        <input type="number" name="salePrice" class="form-control" formControlName="salePrice" id="salePrice"
+          placeholder="Enter Sale Price">
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="seats">Seats</label>
+      <input type="number" name="seats" class="form-control" formControlName="seats" id="seats" placeholder="Enter Seats Number">
+    </div>   -->
+  </form>
+</div>
+<flash-messages></flash-messages>
+<div class="modal-footer ">
+  <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" (click)="onUpdate()"><span>
+      <i class="fa fa-check" aria-hidden="true"></i></span> Update</button>
+</div>

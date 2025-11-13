@@ -1,0 +1,44 @@
+<div class="pt-5 pb-5 mt-5">
+  <div class="container heb">
+      <form autocomplete="on"  [formGroup]="loginForm">
+          <div class="form-group row">
+            <h3 class="col-3 pr-0 color-blue">כניסת לקוח</h3>
+          </div>
+          <div class="form-group row">
+              <input type="text" formControlName="email" class="form-control col-3 input-style" id="email" placeholder="שם משתמש" autocomplete="email"  required>
+              <div *ngIf="isValid('email')" class="invalid-feedback">
+                <div >Username cannot be blank</div>
+              </div>
+              <!-- <span *ngIf="isValid('email')">Username cannot be blank</span> -->
+          </div>
+
+          <div class="form-group row">
+              <input type="password" formControlName="password" name="password" id="password" class="form-control col-3 input-style" placeholder="סיסמה"
+              autocomplete="current-password" required>    
+              <span *ngIf="isValid('password')">Password cannot be blank</span>                
+          </div>
+
+          <!-- <div class="form-group row"> 
+            <a href="_blank">
+                <small id="helpId" class="text-muted color-blue">שכחתי סיסמה</small>
+          </a>
+          </div> -->
+
+          <div class="form-group row">
+              <div class="form-check form-check-inline mr-0">
+                  <input type="checkbox" class="form-check-input mr-0 ml-2" id="exampleCheck1" formControlName="register">
+              </div>
+              <label class="form-check-label color-blue" for="exampleCheck1">אני מעוניין לקבל עדכונים ומבצעים למייל</label>
+          </div>  
+          
+          <div class="form-group row">
+              <button type="submit" class="btn btn-primary form-btn button-style" (click)="login()">
+                  התחבר
+                  <img src="../../../assets/images/SIMBOLE-WHITE.png" class="figure-img img-fluid rounded button-image-size mr-1 mt-1" alt="">                                              
+              </button>
+          </div>
+
+          <flash-messages></flash-messages>
+      </form>
+  </div>
+</div>

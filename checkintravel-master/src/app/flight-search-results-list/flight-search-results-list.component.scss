@@ -1,0 +1,16 @@
+@import '../../styles.scss';
+
+ul{
+    direction: rtl;
+    text-align: right;
+    color: color(primary-blue);
+    padding: 0;
+
+    li{        
+        text-decoration: none;
+        color: color(primary-blue);
+        border-bottom: 1px solid color(primary-gold);
+        // height : 303.5px;
+    }
+}
+

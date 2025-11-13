@@ -1,0 +1,23 @@
+<div *ngIf="isUser">  
+  <div class="heb headline-border bottom-border-gold border-margin py-4">
+    <app-client-summary [showHello]=true></app-client-summary>
+  </div>
+</div>
+<section class="search-margin-bottom" [ngClass]="{'search-margin': isUser}">
+  <div class="slider-container">
+    <app-search-slider></app-search-slider>
+  </div>
+  <div class="search-bar d-flex justify-content-center">
+    <!-- <app-flight-search></app-flight-search> -->
+    <app-search-bar class="search-form"></app-search-bar>
+  </div>
+</section>
+<flash-messages></flash-messages>
+<div *ngIf="isUser==false">
+  <section class="sales">
+    <div class="container">
+      <app-flight-sales></app-flight-sales>
+    </div>
+  </section>
+</div>
+
