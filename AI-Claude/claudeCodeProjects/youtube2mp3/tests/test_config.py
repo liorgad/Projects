@@ -36,3 +36,9 @@ def test_load_port_non_integer_value_returns_default(tmp_path):
         port = not-a-number
         """))
     assert load_port(str(config_file)) == DEFAULT_PORT
+
+
+def test_load_port_malformed_file_returns_default(tmp_path):
+    config_file = tmp_path / "config.ini"
+    config_file.write_text("this is not valid ini syntax at all\n")
+    assert load_port(str(config_file)) == DEFAULT_PORT
