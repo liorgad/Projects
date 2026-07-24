@@ -1,0 +1,11 @@
+.env
+downloads/
+__pycache__/
+*.pyc
+.venv/
+venv/
+logs/
+dist/
+dist_installer/
+installer/vendor/
+pyinstaller_build/
