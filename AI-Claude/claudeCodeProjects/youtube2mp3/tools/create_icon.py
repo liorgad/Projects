@@ -44,8 +44,14 @@ def draw_icon(size):
 
 def main():
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    base = draw_icon(256)
-    base.save(OUTPUT_PATH, format='ICO', sizes=[(s, s) for s in SIZES])
+    images = [draw_icon(s) for s in SIZES]
+    largest = images[-1]
+    largest.save(
+        OUTPUT_PATH,
+        format='ICO',
+        sizes=[(s, s) for s in SIZES],
+        append_images=images[:-1],
+    )
     print(f'Wrote {OUTPUT_PATH}')
 
 
