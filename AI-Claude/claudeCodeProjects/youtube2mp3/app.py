@@ -98,6 +98,7 @@ def download():
     title = request.args.get('title', video_id).strip()
 
     if not video_id or not YOUTUBE_ID_RE.match(video_id):
+        activity_log.log_download(LOGGER, video_id, title, error='invalid video_id')
         return jsonify({'error': 'invalid video_id'}), 400
 
     output_path = os.path.join(DOWNLOADS_DIR, f'{video_id}.mp3')
@@ -106,6 +107,7 @@ def download():
     real_downloads = os.path.realpath(DOWNLOADS_DIR)
     real_output = os.path.realpath(output_path)
     if not real_output.startswith(real_downloads + os.sep):
+        activity_log.log_download(LOGGER, video_id, title, error='invalid path')
         return jsonify({'error': 'invalid path'}), 400
 
     if not os.path.exists(output_path):

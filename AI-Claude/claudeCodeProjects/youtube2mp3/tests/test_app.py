@@ -77,3 +77,62 @@ def test_index_page_includes_favicon_link(client):
     response = client.get('/')
 
     assert b'gadtube.ico' in response.data
+
+
+def test_download_logs_error_on_invalid_video_id(client, monkeypatch, tmp_path):
+    monkeypatch.setattr(app_module, 'DOWNLOADS_DIR', str(tmp_path))
+    log_spy = MagicMock()
+    monkeypatch.setattr(app_module.activity_log, 'log_download', log_spy)
+
+    response = client.get('/api/download?video_id=not-valid&title=Test')
+
+    assert response.status_code == 400
+    log_spy.assert_called_once_with(app_module.LOGGER, 'not-valid', 'Test', error='invalid video_id')
+
+
+def test_download_logs_error_on_path_traversal_attempt(client, monkeypatch, tmp_path):
+    monkeypatch.setattr(app_module, 'DOWNLOADS_DIR', str(tmp_path))
+    log_spy = MagicMock()
+    monkeypatch.setattr(app_module.activity_log, 'log_download', log_spy)
+    # Force the realpath check to fail regardless of video_id, simulating a
+    # resolved path that escapes DOWNLOADS_DIR.
+    monkeypatch.setattr(app_module.os.path, 'realpath', lambda p: 'C:\\somewhere\\else')
+
+    response = client.get('/api/download?video_id=dQw4w9WgXcQ&title=Test')
+
+    assert response.status_code == 400
+    log_spy.assert_called_once_with(app_module.LOGGER, 'dQw4w9WgXcQ', 'Test', error='invalid path')
+
+
+def test_download_uses_resolved_ytdlp_and_ffmpeg_paths(client, monkeypatch, tmp_path):
+    monkeypatch.setattr(app_module, 'DOWNLOADS_DIR', str(tmp_path))
+    captured_cmd = {}
+
+    def fake_run(cmd, **kwargs):
+        captured_cmd['cmd'] = cmd
+        (tmp_path / 'dQw4w9WgXcQ.mp3').write_bytes(b'fake mp3 data')
+        return MagicMock(returncode=0, stderr='')
+
+    monkeypatch.setattr(app_module.subprocess, 'run', fake_run)
+    monkeypatch.setattr(app_module.activity_log, 'log_download', MagicMock())
+
+    client.get('/api/download?video_id=dQw4w9WgXcQ&title=Test')
+
+    assert app_module.YTDLP_PATH in captured_cmd['cmd']
+    assert app_module.FFMPEG_PATH in captured_cmd['cmd']
+    assert '--ffmpeg-location' in captured_cmd['cmd']
+
+
+def test_search_uses_resolved_ytdlp_path(client, monkeypatch):
+    captured_cmd = {}
+
+    def fake_run(cmd, **kwargs):
+        captured_cmd['cmd'] = cmd
+        return MagicMock(returncode=0, stdout='', stderr='')
+
+    monkeypatch.setattr(app_module.subprocess, 'run', fake_run)
+    monkeypatch.setattr(app_module.activity_log, 'log_search', MagicMock())
+
+    client.get('/api/search?q=test')
+
+    assert app_module.YTDLP_PATH in captured_cmd['cmd']
