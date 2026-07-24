@@ -1,3 +1,5 @@
+import pytest
+
 import activity_log
 
 
@@ -59,3 +61,19 @@ def test_setup_logger_uses_thirty_day_retention(tmp_path):
     handler = logger.handlers[0]
     assert handler.backupCount == 30
     assert handler.when.upper() == 'MIDNIGHT'
+
+
+def test_setup_logger_closes_previous_handler_on_reinit(tmp_path):
+    logger = activity_log.setup_logger(str(tmp_path))
+    old_handler = logger.handlers[0]
+
+    activity_log.setup_logger(str(tmp_path))
+
+    assert old_handler.stream is None or old_handler.stream.closed
+
+
+def test_log_search_raises_if_neither_result_count_nor_error_given(tmp_path):
+    logger = activity_log.setup_logger(str(tmp_path))
+
+    with pytest.raises(ValueError):
+        activity_log.log_search(logger, 'oops query')

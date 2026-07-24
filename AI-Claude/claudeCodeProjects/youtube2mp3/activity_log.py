@@ -13,7 +13,9 @@ def setup_logger(log_dir):
 
     logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(logging.INFO)
-    logger.handlers.clear()
+    for h in logger.handlers[:]:
+        h.close()
+        logger.removeHandler(h)
     logger.propagate = False
 
     handler = TimedRotatingFileHandler(
@@ -32,6 +34,8 @@ def log_search(logger, query, result_count=None, error=None):
     if error is not None:
         detail = f'q="{query}" | error: {error}'
     else:
+        if result_count is None:
+            raise ValueError('log_search requires result_count when error is not given')
         detail = f'q="{query}" | {result_count} results'
     logger.info('%-8s | %s', 'search', detail)
 
