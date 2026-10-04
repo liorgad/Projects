@@ -13,7 +13,8 @@ export const STATUS_META = {
   [STATUS.RESERVED]: { label: 'שמור', fill: '#fde68a', stroke: '#d97706' },
 };
 
-export const DEFAULT_PRICE = 1200;
+// 0 = טרם נקבע מחיר למקום. הערך הזה חייב להישאר תואם ל-DEFAULT בעמודת price ב-schema.sql
+export const DEFAULT_PRICE = 0;
 
 const SECTIONS_CONFIG = [
   {

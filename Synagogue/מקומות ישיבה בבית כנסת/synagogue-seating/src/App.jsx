@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import './App.css';
-import { buildInitialLayout, STATUS_META } from './data/seatLayout';
+import { buildInitialLayout, DEFAULT_PRICE, STATUS_META } from './data/seatLayout';
 import * as api from './api';
 import SeatMap from './components/SeatMap';
 import SeatDetailsPanel from './components/SeatDetailsPanel';
@@ -118,7 +118,7 @@ export default function App() {
         col: nextCol,
         status: 'available',
         name: '',
-        price: 1200,
+        price: DEFAULT_PRICE,
         posX: x,
         posY: y,
       };
@@ -195,7 +195,7 @@ export default function App() {
         col: i + 1,
         status: 'available',
         name: '',
-        price: 1200,
+        price: DEFAULT_PRICE,
         posX: null,
         posY: null,
       }));

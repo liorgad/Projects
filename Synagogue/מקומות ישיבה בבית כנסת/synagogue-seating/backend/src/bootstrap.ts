@@ -49,7 +49,8 @@ const SAMPLE_NAMES = [
   'פרץ אליהו', 'אזולאי חנה', 'גבאי שלמה', 'דהן מרים', 'עמר יוסף',
 ];
 
-const DEFAULT_PRICE = 1200;
+// 0 = טרם נקבע מחיר. תואם ל-DEFAULT בעמודת price ולקבוע DEFAULT_PRICE בצד הלקוח
+const DEFAULT_PRICE = 0;
 
 function hashSeed(str: string): number {
   let h = 0;

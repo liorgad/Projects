@@ -84,8 +84,10 @@ export default function SeatDetailsPanel({ seat, blockTitle, editMode, onSave, o
             />
             <span className="price-currency">₪</span>
           </div>
-          <span className="field-hint" dir="ltr">
-            {currencyFormatter.format(Number(price) || 0)}
+          {/* dir="auto": המחרוזת המעוצבת של Intl.NumberFormat נושאת סימוני RLM משלה ולכן תמיד
+              מוצגת נכון; ה-dir="auto" כאן קיים כדי שהודעת הטקסט בעברית (כש"טרם נקבע מחיר") תקבל כיווניות RTL */}
+          <span className="field-hint" dir="auto">
+            {Number(price) > 0 ? currencyFormatter.format(Number(price)) : 'טרם נקבע מחיר'}
           </span>
         </label>
 
