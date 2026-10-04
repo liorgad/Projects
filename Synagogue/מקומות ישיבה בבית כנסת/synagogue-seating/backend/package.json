@@ -8,7 +8,9 @@
     "build": "tsc -p tsconfig.json && cp src/schema.sql dist/schema.sql",
     "start": "node dist/server.js",
     "db:init": "node dist/init-db.js",
-    "db:seed": "node dist/seed.js"
+    "db:seed": "node dist/seed.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -21,7 +23,10 @@
     "@types/express": "^4.17.21",
     "@types/node": "^22.10.2",
     "@types/pg": "^8.11.10",
+    "@types/supertest": "^7.2.1",
+    "supertest": "^7.3.1",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^5.0.3"
   }
 }
