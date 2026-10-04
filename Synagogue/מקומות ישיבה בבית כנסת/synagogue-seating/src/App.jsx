@@ -86,11 +86,16 @@ export default function App() {
   const handleSeatClick = (seat) => setSelectedSeatId(seat.id);
   const handleClose = () => setSelectedSeatId(null);
 
+  // מחזיר Promise כדי שפאנל הפרטים יוכל לנעול את הטופס עד לאישור מהשרת.
+  // במצב מקוון מעדכנים את ה-state רק מהתשובה של השרת - היא המקור האמין.
   const handleSave = (seatId, updates) => {
-    setLayout((prev) => updateSeatInLayout(prev, seatId, updates));
-    if (!offlineMode) {
-      api.updateSeat(seatId, updates).catch((err) => console.error('שמירה נכשלה:', err));
+    if (offlineMode) {
+      setLayout((prev) => updateSeatInLayout(prev, seatId, updates));
+      return Promise.resolve();
     }
+    return api.updateSeat(seatId, updates).then((saved) => {
+      setLayout((prev) => updateSeatInLayout(prev, seatId, saved));
+    });
   };
 
   const handleSeatMove = (seatId, posX, posY) => {

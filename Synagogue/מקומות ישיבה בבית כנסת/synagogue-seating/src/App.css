@@ -348,7 +348,7 @@
   font-family: inherit;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background: #1f2937;
 }
 
@@ -377,7 +377,7 @@
   background: #ffffff;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background: #f3f4f6;
 }
 
@@ -386,6 +386,29 @@
   border-color: #fecaca;
 }
 
-.btn-danger:hover {
+.btn-danger:hover:not(:disabled) {
   background: #fef2f2;
+}
+
+.field-error {
+  margin-block: 0.5rem 0;
+  padding-block: 0.5rem;
+  padding-inline: 0.75rem;
+  border-radius: 6px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 0.875rem;
+}
+
+.btn-primary:disabled,
+.btn-secondary:disabled,
+.btn-danger:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.field input:disabled,
+.field select:disabled {
+  opacity: 0.6;
+  cursor: progress;
 }
