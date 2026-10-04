@@ -27,6 +27,16 @@ function updateSeatInLayout(layout, seatId, updates) {
   }));
 }
 
+function findSeat(layout, seatId) {
+  for (const section of layout ?? []) {
+    for (const block of section.blocks) {
+      const seat = block.seats.find((s) => s.id === seatId);
+      if (seat) return seat;
+    }
+  }
+  return null;
+}
+
 export default function App() {
   const [layout, setLayout] = useState(null);
   const [offlineMode, setOfflineMode] = useState(false);
@@ -37,6 +47,8 @@ export default function App() {
   const [editMode, setEditMode] = useState(false);
   const [editBlockId, setEditBlockId] = useState(null);
   const [rowCount, setRowCount] = useState(8);
+  const [actionError, setActionError] = useState(null);
+  const [deletingSeatId, setDeletingSeatId] = useState(null);
 
   const loadLayout = () => {
     setLoading(true);
@@ -98,17 +110,38 @@ export default function App() {
     });
   };
 
+  // הגרירה נשארת אופטימית - מקום שלא עוקב אחרי הסמן אינו שמיש.
+  // אם השמירה נכשלת המקום קופץ חזרה למיקום הקודם והמשתמש מקבל הודעה.
   const handleSeatMove = (seatId, posX, posY) => {
+    const previous = findSeat(layout, seatId);
     setLayout((prev) => updateSeatInLayout(prev, seatId, { posX, posY }));
-    if (!offlineMode) {
-      api.updateSeat(seatId, { posX, posY }).catch((err) => console.error('שמירת מיקום נכשלה:', err));
-    }
+    if (offlineMode) return;
+    setActionError(null);
+    api
+      .updateSeat(seatId, { posX, posY })
+      .then(() => setActionError(null))
+      .catch((err) => {
+        setLayout((prev) => {
+          const current = findSeat(prev, seatId);
+          // גרירה חדשה יותר כבר כתבה מיקום אחר - לא דורסים אותה
+          if (current?.posX !== posX || current?.posY !== posY) return prev;
+          return updateSeatInLayout(prev, seatId, {
+            posX: previous?.posX ?? null,
+            posY: previous?.posY ?? null,
+          });
+        });
+        setActionError(`הזזת המקום לא נשמרה: ${err.message}`);
+      });
   };
 
   const handleResetPosition = (seatId) => {
     setLayout((prev) => updateSeatInLayout(prev, seatId, { posX: null, posY: null }));
     if (!offlineMode) {
-      api.updateSeat(seatId, { posX: null, posY: null }).catch((err) => console.error(err));
+      setActionError(null);
+      api
+        .updateSeat(seatId, { posX: null, posY: null })
+        .then(() => setActionError(null))
+        .catch((err) => setActionError(`איפוס המיקום נכשל: ${err.message}`));
     }
   };
 
@@ -135,6 +168,7 @@ export default function App() {
       );
       return;
     }
+    setActionError(null);
     api
       .createSeat(blockId, { row: 0, col: nextCol, posX: x, posY: y })
       .then((newSeat) => {
@@ -144,24 +178,42 @@ export default function App() {
             blocks: section.blocks.map((b) => (b.id === blockId ? { ...b, seats: [...b.seats, newSeat] } : b)),
           })),
         );
+        setActionError(null);
       })
-      .catch((err) => console.error('הוספת מקום נכשלה:', err));
+      .catch((err) => setActionError(`הוספת מקום נכשלה: ${err.message}`));
   };
 
   const handleDeleteSeat = (seatId) => {
-    setLayout((prev) =>
-      prev.map((section) => ({
-        ...section,
-        blocks: section.blocks.map((block) => ({
-          ...block,
-          seats: block.seats.filter((s) => s.id !== seatId),
+    const removeLocally = () => {
+      setLayout((prev) =>
+        prev.map((section) => ({
+          ...section,
+          blocks: section.blocks.map((block) => ({
+            ...block,
+            seats: block.seats.filter((s) => s.id !== seatId),
+          })),
         })),
-      })),
-    );
-    setSelectedSeatId(null);
-    if (!offlineMode) {
-      api.deleteSeat(seatId).catch((err) => console.error('מחיקת מקום נכשלה:', err));
+      );
+      // מנקים את הבחירה רק אם היא עדיין מצביעה על המקום שנמחק - המשתמש
+      // יכול היה לבחור מקום אחר בזמן שהבקשה הזו הייתה בדרך.
+      setSelectedSeatId((cur) => (cur === seatId ? null : cur));
+      setDeletingSeatId((cur) => (cur === seatId ? null : cur));
+      setActionError(null);
+    };
+
+    if (offlineMode) {
+      removeLocally();
+      return;
     }
+    setActionError(null);
+    setDeletingSeatId(seatId);
+    api
+      .deleteSeat(seatId)
+      .then(removeLocally)
+      .catch((err) => {
+        setDeletingSeatId((cur) => (cur === seatId ? null : cur));
+        setActionError(`מחיקת המקום נכשלה: ${err.message}`);
+      });
   };
 
   const handleClearBlock = (blockId) => {
@@ -173,16 +225,29 @@ export default function App() {
     );
     if (!confirmed) return;
 
-    setLayout((prev) =>
-      prev.map((section) => ({
-        ...section,
-        blocks: section.blocks.map((b) => (b.id === blockId ? { ...b, seats: [] } : b)),
-      })),
-    );
-    setSelectedSeatId(null);
-    if (!offlineMode) {
-      api.clearBlockSeats(blockId).catch((err) => console.error('ניקוי הבלוק נכשל:', err));
+    const seatIdsInBlock = new Set(block.seats.map((s) => s.id));
+    const clearLocally = () => {
+      setLayout((prev) =>
+        prev.map((section) => ({
+          ...section,
+          blocks: section.blocks.map((b) => (b.id === blockId ? { ...b, seats: [] } : b)),
+        })),
+      );
+      // מנקים את הבחירה רק אם היא שייכת לבלוק שפונה עכשיו - המשתמש יכול
+      // היה לבחור מקום בבלוק אחר בזמן שהבקשה הזו הייתה בדרך.
+      setSelectedSeatId((cur) => (cur != null && seatIdsInBlock.has(cur) ? null : cur));
+      setActionError(null);
+    };
+
+    if (offlineMode) {
+      clearLocally();
+      return;
     }
+    setActionError(null);
+    api
+      .clearBlockSeats(blockId)
+      .then(clearLocally)
+      .catch((err) => setActionError(`ניקוי הבלוק נכשל: ${err.message}`));
   };
 
   const handleAddRow = (blockId, count) => {
@@ -215,6 +280,7 @@ export default function App() {
       return;
     }
 
+    setActionError(null);
     api
       .addRow(blockId, nextRow, count)
       .then((newSeats) => {
@@ -226,8 +292,9 @@ export default function App() {
             ),
           })),
         );
+        setActionError(null);
       })
-      .catch((err) => console.error('הוספת שורה נכשלה:', err));
+      .catch((err) => setActionError(`הוספת שורה נכשלה: ${err.message}`));
   };
 
   if (loading) {
@@ -275,6 +342,15 @@ export default function App() {
           לא ניתן להתחבר לשרת ({loadError}) — עובד במצב הדגמה מקומי, שינויים לא יישמרו.
           <button type="button" onClick={loadLayout}>
             נסה שוב
+          </button>
+        </div>
+      )}
+
+      {actionError && (
+        <div className="action-error-banner" role="alert">
+          {actionError}
+          <button type="button" onClick={() => setActionError(null)}>
+            סגירה
           </button>
         </div>
       )}
@@ -366,6 +442,7 @@ export default function App() {
           onClose={handleClose}
           onDelete={handleDeleteSeat}
           onResetPosition={handleResetPosition}
+          deleting={deletingSeatId === selectedSeat?.id}
         />
       </div>
     </div>

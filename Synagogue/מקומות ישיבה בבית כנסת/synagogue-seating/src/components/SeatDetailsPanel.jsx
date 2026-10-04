@@ -14,7 +14,16 @@ function errorMessage(err) {
   return message.trim() ? message : FALLBACK_SAVE_ERROR;
 }
 
-export default function SeatDetailsPanel({ seat, blockTitle, editMode, onSave, onClose, onDelete, onResetPosition }) {
+export default function SeatDetailsPanel({
+  seat,
+  blockTitle,
+  editMode,
+  onSave,
+  onClose,
+  onDelete,
+  onResetPosition,
+  deleting,
+}) {
   const [name, setName] = useState('');
   const [status, setStatus] = useState(STATUS.AVAILABLE);
   const [price, setPrice] = useState(0);
@@ -159,8 +168,13 @@ export default function SeatDetailsPanel({ seat, blockTitle, editMode, onSave, o
               איפוס מיקום לרשת המקורית
             </button>
           )}
-          <button type="button" className="btn-danger" onClick={() => onDelete(seat.id)} disabled={saving}>
-            מחיקת מקום זה
+          <button
+            type="button"
+            className="btn-danger"
+            onClick={() => onDelete(seat.id)}
+            disabled={saving || deleting}
+          >
+            {deleting ? 'מוחק…' : 'מחיקת מקום זה'}
           </button>
         </div>
       )}

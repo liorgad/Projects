@@ -1,10 +1,16 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000/api';
 
 async function request(path, options) {
-  const res = await fetch(`${API_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options,
-  });
+  let res;
+  try {
+    res = await fetch(`${API_URL}${path}`, {
+      headers: { 'Content-Type': 'application/json' },
+      ...options,
+    });
+  } catch (err) {
+    // כשל ברמת הרשת (השרת כבוי / אין חיבור) - fetch זורק TypeError באנגלית
+    throw new Error('לא ניתן להתחבר לשרת', { cause: err });
+  }
   if (!res.ok) {
     let message = `שגיאת שרת (${res.status})`;
     try {
