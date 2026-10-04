@@ -39,8 +39,13 @@ docker compose up --build         # frontend :8080, API :4000, db :5432
 - ה-API מחזיר camelCase (`blockId`, `posX`); ה-DB שומר snake_case. ההמרה ב-`mapSeat` ב-`backend/src/types.ts`.
 - נקודות קצה לבלוקים (`PATCH/POST/DELETE`) קיימות בשרת אך לא מחוברות ל-UI.
 
-## מה לא נבדק
-Postgres אמיתי, `docker compose up --build`, והתנהגות בדפדפן (גרירה, הוספה בלחיצה, סרגל כלים). בדוק אותם לפני שמסתמכים עליהם.
+## מה נבדק
+אומת ב-2026-10-04: `docker compose up --build`, PostgreSQL אמיתי (256 מקומות דרך `/api/layout`),
+והתנהגות בדפדפן (טעינת המפה, בחירת מקום, 0 שגיאות קונסול).
+לא נבדק: מסלול ההזרעה על DB ריק — דורש מחיקת ה-volume.
+
+## בדיקות
+`pnpm test` ב-frontend, `npm test` ב-`backend/`. ה-frontend ב-pnpm וה-backend ב-npm — אל תחליף.
 
 ## היסטוריה בקצרה
-ספריית `@alisaitteke/seatmap-canvas` נפסלה (חבילת ה-React שלה שבורה ב-npm), נבנה רכיב SVG עצמאי → נוסף backend ב-TS+Postgres → מצב עריכה (גרירה/הוספה/מחיקה) → "נקה בלוק" ו"הוסף שורה" → Docker.
+ספריית `@alisaitteke/seatmap-canvas` נפסלה (חבילת ה-React שלה שבורה ב-npm), נבנה רכיב SVG עצמאי → נוסף backend ב-TS+Postgres → מצב עריכה (גרירה/הוספה/מחיקה) → "נקה בלוק" ו"הוסף שורה" → Docker → בדיקות Vitest + תיקון מחיר ברירת מחדל, שמירה פסימית, ו-camelCase ב-blocks.

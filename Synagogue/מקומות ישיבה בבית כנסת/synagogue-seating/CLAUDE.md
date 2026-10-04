@@ -63,12 +63,25 @@ synagogue-seating/
 2. נבנה Backend ב-TypeScript עם `pg` ו-SQL ישיר (בלי ORM, כדי להימנע מ-binaries והגירות).
 3. נוסף מצב עריכה, ואז כלי "נקה בלוק" ו"הוסף שורה".
 4. נוסף Docker (3 שירותים) ו-README.
+5. נוספו בדיקות (Vitest בשני הצדדים), ותוקנו שלושה באגים: מחיר ברירת מחדל לא עקבי (0 = טרם נקבע מחיר), שמירות שנכשלו בשקט (שמירה פסימית + באנר שגיאה), ו-`blocks.ts` שהחזיר snake_case.
 
 ## מה אומת ומה לא
-- אומת: `tsc --noEmit` ו-build של ה-backend; `vite build` ו-oxlint של ה-frontend (0 אזהרות); השרת עולה ועונה ל-`/api/health`, ושגיאת DB מטופלת ב-500 בעברית בלי קריסה.
-- **לא נבדק מול Postgres אמיתי** (בסביבת הפיתוח של Claude אין הרשאות root להתקנה).
-- **לא נבדק `docker compose up --build`** (אין Docker בסביבת הפיתוח של Claude). לבדוק ידנית.
-- לא נבדק בדפדפן בפועל: גרירה, הוספה בלחיצה, סרגל הכלים.
+אומת ב-2026-10-04 מול הסביבה האמיתית (Docker 29.8.1 זמין במכונה):
+- `docker compose up --build` — שלושת ה-images נבנים, שלושת הקונטיינרים עולים, ה-DB מדווח healthy.
+- מול PostgreSQL 16 אמיתי: `GET /api/layout` מחזיר 2 אזורים / 5 בלוקים / 256 מקומות.
+- עברית עוברת הלוך-חזור דרך ה-DB ללא שיבוש.
+- בדפדפן: המפה נטענת, לחיצה על מקום פותחת את פאנל הפרטים, 0 שגיאות ו-0 אזהרות בקונסול.
+- nginx מגיש SPA fallback (`/some/deep/route` → 200).
+- ולידציה: 400 על סטאטוס לא תקין, 404 על מקום לא קיים, שתיהן עם הודעה בעברית.
+- `vitest run` — 11 בדיקות frontend, 4 בדיקות backend. `tsc --noEmit`, `vite build` ו-oxlint נקיים.
+
+**לא אומת:** מסלול ההזרעה על DB ריק (`seedIfEmpty`). ה-volume `synagogue-seating_db-data`
+כבר מכיל נתונים, ולכן הבדיקה דורשת `docker compose down -v` שמוחק אותו — לא בוצע.
+
+## בדיקות
+- Frontend: `pnpm test` (Vitest + Testing Library, סביבת jsdom).
+- Backend: `cd backend && npm test` (Vitest, ה-pool של `pg` ממוק — אין צורך ב-DB).
+- שים לב: ה-frontend מנוהל ב-pnpm וה-backend ב-npm. אל תחליף ביניהם.
 
 ## רעיונות להמשך
 חיבור ה-UI לעריכת בלוקים (שינוי שם, יצירה, מחיקה), הרשאות/התחברות, ייצוא לאקסל/PDF, undo, בחירה מרובה וגרירה קבוצתית, משתני סביבה ל-`VITE_API_URL` דרך `.env` של compose.
