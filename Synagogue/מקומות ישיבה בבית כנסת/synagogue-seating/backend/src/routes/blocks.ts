@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { pool } from '../db.js';
-import type { BlockRow } from '../types.js';
+import { mapBlock, type BlockRow } from '../types.js';
 
 export const blocksRouter = Router();
 
@@ -19,7 +19,7 @@ blocksRouter.patch('/blocks/:id', async (req, res) => {
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'בלוק לא נמצא' });
     }
-    res.json(result.rows[0]);
+    res.json(mapBlock(result.rows[0]));
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'שגיאה בעדכון הבלוק' });
@@ -42,7 +42,7 @@ blocksRouter.post('/sections/:sectionId/blocks', async (req, res) => {
       'INSERT INTO blocks (id, section_id, title, sort_order) VALUES ($1, $2, $3, $4) RETURNING *',
       [id.trim(), sectionId, title.trim(), sortOrder],
     );
-    res.status(201).json({ ...result.rows[0], seats: [] });
+    res.status(201).json({ ...mapBlock(result.rows[0]), seats: [] });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'שגיאה ביצירת הבלוק' });

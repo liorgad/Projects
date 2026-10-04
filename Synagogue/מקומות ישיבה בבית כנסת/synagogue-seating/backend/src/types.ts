@@ -65,3 +65,14 @@ export function mapSeat(row: SeatRow): Seat {
     price: row.price,
   };
 }
+
+export type BlockSummary = Omit<Block, 'seats'>;
+
+export function mapBlock(row: BlockRow): BlockSummary {
+  return {
+    id: row.id,
+    sectionId: row.section_id,
+    title: row.title,
+    sortOrder: row.sort_order,
+  };
+}
